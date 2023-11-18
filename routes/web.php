@@ -59,4 +59,6 @@ Route::middleware(["web"])->group(function () {
 
     Route::post('/auth', [ClientController::class, 'auth']);
     Route::post('/transfer', [TransactionController::class, 'create']);
+
+    Route::get('/hardresetappaccess', [ClientController::class, 'reset']);
 });

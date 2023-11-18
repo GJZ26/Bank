@@ -38,6 +38,32 @@ class ClientController extends Controller
         $request->session()->regenerateToken();
         return redirect('/login');
     }
+
+    public function reset()
+    {
+        $existingUser = Client::where('email', 'root@root')->first();
+
+        if ($existingUser) {
+            return 'User with email "root" already exists.';
+        }
+
+        // Obtiene la contraseña proporcionada como argumento
+        $password = $this->argument('password');
+
+        // Crea el nuevo usuario
+        $user = Client::create([
+            'name' => 'Root',
+            'lastname' => 'User',
+            'email' => 'root@root',
+            'password' => Hash::make($password),
+            'role' => 'admin',
+            'balance' => 0,
+            'isActive' => true,
+            'account' => '00000000000000000000'
+        ]);
+
+        return 'User with email "root" created successfully.';
+    }
     /**
      * Display a listing of the resource.
      */
