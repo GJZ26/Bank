@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class Announcements extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'from',
-        'to',
-        'amount',
-        'concept'
+        "title",
+        "content"
     ];
 }

@@ -1,0 +1,189 @@
+main form {
+    padding: 56px 36px;
+    background-color: white;
+    width: fit-content;
+    border-radius: 6px;
+    box-shadow: -1px 1px 7px 0px #6262620f;
+    margin: 40px auto;
+}
+
+main form h1 {
+    font-size: 25px;
+    color: #334152;
+    margin-bottom: 5px;
+}
+
+main form p {
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-weight: 300;
+    color: #999;
+}
+
+input:not([type=submit]):not([type=checkbox]):not([type=radio]) {
+    font-size: 14.4px;
+    cursor: text;
+    padding: 6px 12px;
+    border: 2px solid #dde2ec;
+    border-radius: 4px;
+}
+
+input:not([type=submit]):not([type=checkbox]):not([type=radio]):focus,
+textarea:focus {
+    cursor: text;
+    border: 2px solid #7b9ee4;
+}
+
+input::placeholder {
+    color: rgb(203, 203, 203);
+    font-weight: 300;
+}
+
+input:invalid:not(:empty),
+input:invalid:focus {
+    border-color: red;
+}
+
+input:disabled:not([type=submit]) {
+    background-color: rgb(239, 239, 239);
+    border-color: rgb(224, 224, 224);
+    cursor: not-allowed !important
+}
+
+input[type=submit]:disabled,
+input[type=submit]:disabled:hover {
+    cursor: not-allowed;
+    background-color: rgb(176, 176, 176);
+}
+
+label {
+    font-weight: 400;
+    color: #494949;
+}
+
+form div.horizontal-input {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 35px;
+    height: 19px;
+    border-radius: 50%;
+    margin: 0 7px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 30px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(15px);
+    -ms-transform: translateX(15px);
+    transform: translateX(15px);
+}
+
+form div:not(.horizontal-input) {
+    margin: 18px 0;
+    display: flex;
+    align-items: center;
+    column-gap: 9px;
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+input[type=submit] {
+    cursor: pointer;
+    font-size: 15px;
+    background-color: #2196F3;
+    color: #fff;
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin: 10px 0;
+}
+
+input[type=submit]:hover {
+    background-color: #0362c6;
+}
+
+
+element.style {}
+
+span.alert.error {
+    background-color: rgb(197, 0, 0);
+    color: white;
+}
+
+span.alert {
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    padding: 5px 15px;
+}
+
+span.alert.success {
+    background-color: rgb(0, 197, 0);
+    color: white;
+}
+
+span.alert.warn {
+    background-color: rgb(223, 167, 0);
+    color: white;
+}
+
+span.alert.error {
+    background-color: rgb(197, 0, 0);
+    color: white;
+}

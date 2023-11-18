@@ -1,0 +1,45 @@
+table.record th {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+table.record td,
+table.record th {
+    border: none;
+    border-bottom: 1px solid #a6a6a674;
+}
+
+table.record th i {
+    font-size: 10px;
+    color: #9999999f;
+    margin-left: 5px;
+}
+
+table.record th.active i {
+    font-size: 10px;
+    color: rgb(0, 106, 255);
+}
+
+table.record td {
+    font-weight: 400;
+    font-size: 15px;
+    padding: 5px 10px;
+}
+
+div.records {
+    background-color: white;
+    width: fit-content;
+    margin: auto;
+    padding: 20px 50px;
+    border-radius: 5px;
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+
+input[type=search]{
+    margin-bottom: 20px;
+}
+
+div.records h2{
+    margin-bottom: 20px;
+}

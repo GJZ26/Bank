@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('from');
-            $table->bigInteger('to');
-            $table->bigInteger('amount');
-            $table->string('concept');
+            $table->string('from');
+            $table->string('to');
+            $table->unsignedFloat('amount');
+            $table->string('concept')->nullable(true);
             $table->timestamps();
         });
     }

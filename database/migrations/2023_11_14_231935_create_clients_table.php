@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->enum('role', ['admin', 'client']);
-            $table->bigInteger('account')->unique();
-            $table->bigInteger('balance');
+            $table->string('account')->unique();
+            $table->unsignedFloat('balance');
             $table->boolean('isActive');
             $table->timestamps();
         });

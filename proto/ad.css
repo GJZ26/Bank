@@ -1,0 +1,64 @@
+main h1.centered {
+    text-align: center;
+    margin-top: 40px;
+}
+
+form textarea {
+    font-size: 14.4px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border: 2px solid #dde2ec;
+    border-radius: 4px;
+    resize: none;
+}
+
+form div.vertical-input {
+    display: flex;
+    flex-direction: column;
+}
+
+div.post {
+    background-color: white;
+    max-width: 700px;
+    border-radius: 4px;
+    box-shadow: -1px 1px 7px 0px #6262620f;
+    margin: 20px auto;
+    padding: 35px 40px;
+}
+
+div.post p {
+    margin-bottom: 10px;
+    color: #494949;
+}
+
+div.post h2 {
+    font-size: 28px;
+    color: #3e3e3e;
+}
+
+div.post span {
+    margin: 2px 0px 20px 1px;
+    font-size: 15px;
+    color: #a5a5a5;
+    font-weight: 300;
+    display: block;
+}
+
+div.post button{
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin: 12px 0;
+}
+
+div.post button:hover{
+    background-color: rgb(255, 52, 52);
+    transition: all 200ms;
+}
+
+div.post button:disabled, div.post button:disabled:hover{
+    cursor: not-allowed;
+    background-color: rgb(127, 92, 92);
+}

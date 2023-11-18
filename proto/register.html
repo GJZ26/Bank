@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@100;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="./register.css">
+    <link rel="stylesheet" href="./general.css">
+    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="./record.css">
+    <link rel="stylesheet" href="./ad.css">
+    <link rel="stylesheet" href="./usermanage.css">
+
+    <title>General Distribution</title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="./logoRed.png" alt="Logo">
+        </div>
+        <div class="client-info">
+            <img src="./default-avatar.png" alt="Default Avatar">
+            <div class="info">
+                <h2>
+                    Irene Yern
+                </h2>
+                <p>
+                    Standard Account
+                </p>
+            </div>
+        </div>
+        <div class="tabs">
+
+
+            <a href="#">
+                <i class="fa-solid fa-gauge-high"></i>Dashboard
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-money-bill-transfer"></i>Transfers
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-clock-rotate-left"></i>Transactions
+            </a>
+
+            <a href="#" class="notificated" notifications="9+">
+                <i class="fa-solid fa-bullhorn"></i>Announcements
+            </a>
+
+            <a href="#" class="active">
+                <i class="fa-solid fa-users"></i>Manage Users
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout
+            </a>
+        </div>
+    </nav>
+
+    <!-- DASHBOARD -->
+    <!-- <main>
+        <div class="main-container">
+            <div class="greeting">
+                <h2>Welcome back, <strong>Irene</strong>.</h2>
+            </div>
+            <h1>Your's account number</h1>
+            <div class="balance">
+                <h2>Your current balance</h2>
+                <p>$0.00 USD</p>
+            </div>
+            <div class="two-segment">
+
+                <div class="info">
+                    <h2>Your Information</h2>
+                    <hr>
+                    <div class="account">
+                        <span>Account status</span>
+                        <p class="active">Active</p>
+                    </div>
+                    <hr>
+                    <div class="info-seg">
+                        <span>Account type</span>
+                        <p>Standard</p>
+                    </div>
+                    <div class="info-seg">
+                        <span>Account number</span>
+                        <p>5510-1235-1204-2134 <button><i class="fa-regular fa-copy"></i></button></p>
+                    </div>
+                    <div class="info-seg">
+                        <span>Full name</span>
+                        <p>Irene Kassandra Yern Cargo</p>
+                    </div>
+                    <div class="info-seg">
+                        <span>Email</span>
+                        <p>account@sample.com</p>
+                    </div>
+                </div>
+                <hr>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>USD</td>
+                            <td>CAD</td>
+                            <td>MXN</td>
+                        </tr>
+                        <tr>
+                            <td>USD</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>CAD</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>MXN</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main> -->
+
+    <!-- TRANSFER -->
+    <!-- <main>
+        <form action="#" method="get">
+            <h1>Transfer</h1>
+            <p>Transfer your credit to another user by means of their account number.</p>
+            <hr>
+            <div class="horizontal-input">
+                <label for="sender">Sender's account number</label>
+                <input type="number" name="sender" id="sender" value="5512123312341234" disabled>
+            </div>
+            <div class="horizontal-input">
+                <label for="recipient">Recipient's account number</label>
+                <input type="number" name="recipient" id="recipient" placeholder="20-digit account number" required>
+            </div>
+            <div class="horizontal-input">
+                <label for="amount">Amount (USD)</label>
+                <input type="number" name="amount" id="amount" max="123" placeholder="Amount to be transferred">
+            </div>
+            <div class="horizontal-input">
+                <label for="concept">Concept</label>
+                <input type="text" name="concept" id="concept" placeholder="Concept">
+            </div>
+            <hr>
+            <input type="submit" value="Transfer" disabled>
+            <span class="alert success">
+                Usuario agregado con éxito
+            </span>
+        </form>
+    </main> -->
+
+    <!-- REGISTER -->
+    <!-- <main>
+        <form action="#" method="get">
+            <h1>Register a new user.</h1>
+            <p>Register a new user as a customer or as an account administrator.</p>
+            <hr>
+            <div class="horizontal-input">
+                <label for="name">First name</label>
+                <input type="text" name="name" id="name" placeholder="First name" autocomplete="off" required>
+            </div>
+
+            <div class="horizontal-input">
+                <label for="lastname">Lastname</label>
+                <input type="text" name="lastname" id="lastname" placeholder="Lastname" autocomplete="off" required>
+            </div>
+
+            <div class="horizontal-input">
+                <label for="Email">E-mail</label>
+                <input type="email" name="email" id="email" placeholder="Enter Email" autocomplete="off" required>
+            </div>
+
+            <div class="horizontal-input">
+                <label for="password">Password</label>
+                <div>
+                    <label for="show">Show</label>
+                    <input type="checkbox" name="show" id="show">
+                    <input type="password" name="password" id="password" placeholder="Password" autocomplete="off" required>
+                </div>
+            </div>
+
+            <div class="horizontal-input">
+                <label for="balance">Balance</label>
+                <input type="number" name="balance" id="balance" placeholder="Beginning balance" autocomplete="off">
+            </div>
+            <hr>
+            <div>
+                <label for="admin">Administrator Account</label>
+                <input type="radio" name="role" id="admin" value="admin">
+            </div>
+
+            <div>
+                <label for="client">Client Account</label>
+                <input type="radio" name="role" id="client" value="client" checked>
+            </div>
+            <hr>
+
+            <div>
+                <label for="isActive">Activate Account</label>
+                <label class="switch">
+                    <input type="checkbox" name="isActive" id="isActive" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <hr>
+            <input type="submit" value="Enviar">
+
+            <span class="alert error">
+                Usuario agregado con éxito
+            </span>
+
+        </form>
+    </main> -->
+
+    <!-- TRANSACTIONS -->
+    <!-- <main>
+        <div class="records">
+            <h2>Transfer registers</h2>
+            <input type="search" name="search" id="search" placeholder="Search" autocomplete="off">
+            <table class="record">
+                <tbody>
+                    <tr>
+                        <th class="active">
+                            #
+                            <i class="fa-solid fa-chevron-up"></i>
+                        </th>
+                        <th>
+                            Account number
+                            <i class="fa-solid fa-chevron-up"></i>
+                        </th>
+                        <th>
+                            Amount
+                            <i class="fa-solid fa-chevron-up"></i>
+                        </th>
+                        <th>
+                            Concept
+                            <i class="fa-solid fa-chevron-up"></i>
+                        </th>
+                        <th>
+                            Date
+                            <i class="fa-solid fa-chevron-up"></i>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>5512-1245-5235-1245</td>
+                        <td>$123.45 USD</td>
+                        <td>A great value</td>
+                        <td>December 1st, 2023 - 15:00 UTC-4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main> -->
+
+    <!-- ANNOUNCEMENTS -->
+    <!-- <main>
+
+        <h1 class="centered">Announcements</h1>
+
+        <form action="#" method="get">
+            <h1>Create announcement </h1>
+            <p>Create an announcement for all your customers, they will see the announcements in the [Announcements]
+            </p>
+            <hr>
+
+            <div class="vertical-input">
+                <label for="title">Title</label>
+                <input required type="text" name="title" id="title" placeholder="Announcement title">
+
+            </div>
+
+            <div class="vertical-input">
+                <label for="content">Content</label>
+                <textarea required name="content" id="content" cols="30" rows="10"></textarea>
+            </div>
+
+            <hr>
+            <input type="submit" value="Post">
+        </form>
+
+        <div class="post">
+            <h2>This is a announcement title</h2>
+            <span>February 12th, 2023</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, nemo voluptatem, maxime molestias porro atque
+                delectus nisi ab </p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum perspiciatis recusandae doloremque id.
+                Corrupti officiis laudantium mollitia distinctio? Nostrum vitae animi nobis, assumenda doloribus
+                reiciendis culpa rerum debitis earum tempora!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, nemo voluptatem, maxime molestias porro atque
+                delectus nisi ab </p>
+        </div>
+
+        <div class="post">
+            <h2>This is a announcement title</h2>
+            <span>February 12th, 2023</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, nemo voluptatem, maxime molestias porro atque
+                delectus nisi ab </p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum perspiciatis recusandae doloremque id.
+                Corrupti officiis laudantium mollitia distinctio? Nostrum vitae animi nobis, assumenda doloribus
+                reiciendis culpa rerum debitis earum tempora!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, nemo voluptatem, maxime molestias porro atque
+                delectus nisi ab </p>
+            <div class="buttons">
+                <button>Remove</button>
+            </div>
+        </div>
+
+        <div class="post">
+            <h2>This is a announcement title</h2>
+            <span>February 12th, 2023</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, nemo voluptatem, maxime molestias porro atque
+                delectus nisi ab </p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum perspiciatis recusandae doloremque id.
+                Corrupti officiis laudantium mollitia distinctio? Nostrum vitae animi nobis, assumenda doloribus
+                reiciendis culpa rerum debitis earum tempora!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, nemo voluptatem, maxime molestias porro atque
+                delectus nisi ab </p>
+            <div class="buttons">
+                <button disabled>Remove</button>
+                <span class="alert error">An error occurred while trying to delete the announcement.</span>
+            </div>
+        </div>
+
+        <div class="post">
+            <span class="alert success">Announcement successfully removed</span>
+        </div>
+
+    </main> -->
+
+    <!-- MANAGE USER -->
+    <main>
+        <div class="records user">
+            <h1>User list</h1>
+            <p>Manage your customer users or administrators from this section.</p>
+            <h2 class="admins">Administrators</h2>
+            <table class="record">
+                <tbody>
+                    <tr>
+                        <td>#</td>
+                        <td>Name</td>
+                        <td>Lastname</td>
+                        <td>Email</td>
+                        <td>Actions</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Marcos</td>
+                        <td>Hernandez</td>
+                        <td>marc@mail.com</td>
+                        <td>
+                            <button class="edit"><i class="fa-solid fa-pen"></i></button>
+                            <button class="delete"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <h2>Clients</h2>
+            <table class="record">
+                <tbody>
+                    <tr>
+                        <td>#</td>
+                        <td>Name</td>
+                        <td>Lastname</td>
+                        <td>Account</td>
+                        <td>Balance</td>
+                        <td>Email</td>
+                        <td>Status</td>
+                        <td>Actions</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Irene</td>
+                        <td>Yern</td>
+                        <td>12345678901234567890</td>
+                        <td>$123.45</td>
+                        <td>Irene@mail.com</td>
+                        <td>Active</td>
+                        <td>
+                            <button class="edit"><i class="fa-solid fa-pen"></i></button>
+                            <button class="delete"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+<script src="https://kit.fontawesome.com/34117c443d.js" crossorigin="anonymous"></script>
+
+</html>

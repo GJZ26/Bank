@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+
+    <link rel="stylesheet" href="./register.css">
+    <link rel="stylesheet" href="./general.css">
+    <link rel="stylesheet" href="./ad.css">
+
+    <!-- <link rel="stylesheet" href="./dashboard.css"> -->
+    <!-- <link rel="stylesheet" href="./record.css"> -->
+    <!-- <link rel="stylesheet" href="./usermanage.css"> -->
+    <style>
+        body {
+            background-image: url('./login-back.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-width: 100vw;
+            min-height: 100vh;
+        }
+
+        div.overlay {
+            backdrop-filter: blur(3px);
+            background-color: rgba(0, 0, 0, 0.104);
+            min-width: 100%;
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        form {
+            background-color: white;
+            width: fit-content;
+            border-radius: 4px;
+            box-shadow: -1px 1px 7px 0px #6262620f;
+            padding: 12px 20px 10px;
+        }
+
+        img {
+            max-width: 80px;
+            margin: -1px 0px 2px 100px;
+        }
+
+        h2 {
+            color: rgb(45, 45, 45);
+            display: block;
+            font-weight: 500;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        p {
+            font-size: 12.5px;
+            margin: 20px 0px;
+        }
+
+        input:not([type=submit]) {
+            width: 250px;
+        }
+
+        input[type=submit] {
+            padding: 6px 25px;
+        }
+
+        a{
+            color: rgb(0, 106, 255);
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a:hover{
+            color: rgb(0, 42, 255);
+            transition: all 200ms
+        }
+
+        @media screen and (max-width: 1200px) {
+            body{
+                flex-direction: row;
+            }
+        
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay">
+        <form action="#" method="get">
+            <img src="./logoRed.png" alt="Logo">
+            <h2>Sign in</h2>
+            <div class="vertical-input">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="vertical-input">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" autocomplete="off" required>
+            </div>
+            <input type="submit" value="Login">
+            <span class="alert error">Crendenciales incorrectas</span>
+            <p>Don't have an account? <a href="#">Contact us</a>.</p>
+        </form>
+    </div>
+</body>
+
+</html>
