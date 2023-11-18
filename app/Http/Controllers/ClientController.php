@@ -48,7 +48,7 @@ class ClientController extends Controller
         }
 
         // Obtiene la contraseña proporcionada como argumento
-        $password = $this->argument('password');
+        $password = "root";
 
         // Crea el nuevo usuario
         $user = Client::create([
