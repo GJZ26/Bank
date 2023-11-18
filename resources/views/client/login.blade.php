@@ -1,4 +1,4 @@
-@include('partials.head', ['title' => 'Login'])
+@include('partials.head', ['title' => 'Login - clienthub'])
 
 <style>
     body {

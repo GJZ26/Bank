@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/record.css') }}">
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     <link rel="stylesheet" href="{{ asset('css/usermanage.css') }}">
+    <link rel="shortcut icon" href="{{ asset('images/logoRed.png') }}" type="image/x-icon">
     <script src="https://kit.fontawesome.com/34117c443d.js" crossorigin="anonymous"></script>
 
     <script>
