@@ -20,7 +20,7 @@
             .then((res) => {
                 if (res.status === 200) {
                     btn.parentElement.parentNode.parentNode.removeChild(btn.parentElement.parentNode)
-                }else{
+                } else {
                     console.log(res)
                 }
             })
@@ -55,9 +55,11 @@
                                 <a href={{ url('/users/' . $admin['id']) }} style="color: #fff">
                                     <button class="edit"><i class="fa-solid fa-pen"></i></button>
                                 </a>
-                                <button class="delete"
-                                    onclick="askDelete(event,{{ $admin['id'] }}, '{{ $admin['name'] }}')"><i
-                                        class="fa-solid fa-trash"></i></button>
+                                @if (Auth::user()['id'] != $admin['id'])
+                                    <button class="delete"
+                                        onclick="askDelete(event,{{ $admin['id'] }}, '{{ $admin['name'] }}')"><i
+                                            class="fa-solid fa-trash"></i></button>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -85,7 +87,8 @@
                             <td>{{ substr($client['account'], 0, 4) . '###' . substr($client['account'], -4) }}</td>
                             <td>${{ number_format($client['balance'], 2) }} USD</td>
                             <td>{{ $client['email'] }}</td>
-                            <td class="{{ $client['isActive'] ? 'active' : 'inactive' }}">{{ $client['isActive'] ? 'Active' : 'Inactive' }}</td>
+                            <td class="{{ $client['isActive'] ? 'active' : 'inactive' }}">
+                                {{ $client['isActive'] ? 'Active' : 'Inactive' }}</td>
                             <td>
                                 <a href={{ url('/users/' . $client['id']) }} style="color: #fff">
                                     <button class="edit">
