@@ -64,19 +64,18 @@
                 <hr>
 
                 <div class="vertical-input">
-                    <label for="title" style="width: 90%">Title</label>
-                    <input style="width: 90%" required type="text" name="title" id="title"
-                        placeholder="Announcement title">
+                    <label for="title">Title</label>
+                    <input required type="text" name="title" id="title" placeholder="Announcement title">
 
                 </div>
 
                 <div class="vertical-input">
-                    <label for="content" style="width: 90%">Content</label>
-                    <textarea required name="content" id="content" cols="30" rows="10" style="width: 90%"></textarea>
+                    <label for="content">Content</label>
+                    <textarea required name="content" id="content" cols="30" rows="10"></textarea>
                 </div>
 
                 <hr>
-                <input type="submit" value="Post" style="margin-left: 30px">
+                <input type="submit" value="Post">
             </form>
         @endif
 
@@ -100,7 +99,7 @@
                 </div>
             @endforeach
         @else
-            <p style="text-align: center;">
+            <p style="text-align: center;font-size: 15px;color: #9f9f9f;" class="messageCentered">
                 There are no announcements yet.
             </p>
         @endif

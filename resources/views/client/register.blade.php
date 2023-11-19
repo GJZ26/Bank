@@ -31,10 +31,10 @@
 
             <div class="horizontal-input">
                 <label for="password">Password</label>
-                <div>
-                    <label for="show">Show</label>
+                <div class="hori">
+                    <label for="show" class="not-too-interesting">Show</label>
                     <input type="checkbox" name="show" id="show" onchange="toggleInputPass(event)">
-                    <input type="password" name="password" id="password" placeholder="Password" autocomplete="off"
+                    <input type="password" class="nomarge" name="password" id="password" placeholder="Password" autocomplete="off"
                         required>
                 </div>
             </div>
@@ -45,18 +45,18 @@
                     step="0.01">
             </div>
             <hr>
-            <div>
+            <div class="hori">
                 <label for="admin">Administrator Account</label>
                 <input type="radio" name="role" id="admin" value="admin">
             </div>
 
-            <div>
+            <div class="hori">
                 <label for="client">Client Account</label>
                 <input type="radio" name="role" id="client" value="client" checked>
             </div>
             <hr>
 
-            <div>
+            <div class="hori">
                 <label for="isActive">Activate Account</label>
                 <label class="switch">
                     <input type="checkbox" name="isActive" id="isActive" checked>
@@ -66,7 +66,7 @@
 
             <hr>
             <input type="submit" value="Create">
-            <a href="/users" style="margin-left: 18px;font-weight: 400;">Back</a>
+            <a href="/users">Back</a>
 
         </form>
         <br><br>

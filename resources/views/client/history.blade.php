@@ -2,62 +2,53 @@
 
 <body>
     @include('partials.nav')
-    <main style="margin-left: 200px">
+    <main>
         <div class="records">
-            <h2>Transfer registers</h2>
+            <h2>Transactions</h2>
+            <p>All records of transactions sent and received.</p>
             {{-- <input type="search" name="search" id="search" placeholder="Search" autocomplete="off"> --}}
             <table class="record">
-                <tbody>
+                <thead>
                     <tr>
-                        <th>
-                            Sender's Account
-                            {{-- <i class="fa-solid fa-chevron-up"></i> --}}
-                        </th>
-                        <th>
-                            Recipient's Account
-                            {{-- <i class="fa-solid fa-chevron-up"></i> --}}
-                        </th>
-                        <th>
-                            Amount
-                            {{-- <i class="fa-solid fa-chevron-up"></i> --}}
-                        </th>
-                        <th>
-                            Concept
-                            {{-- <i class="fa-solid fa-chevron-up"></i> --}}
-                        </th>
-                        <th>
-                            Date
-                            {{-- <i class="fa-solid fa-chevron-up"></i> --}}
-                        </th>
+                        <th>Sender's Account</th>
+                        <th>Recipient's Account</th>
+                        <th>Amount</th>
+                        <th class="not-too-interesting">Concept</th>
+                        <th class="not-too-interesting">Date</th>
                     </tr>
-                    @foreach ($response as $record)
+                </thead>
+                <tbody>
+                    @if (isset($response))
+                        @foreach ($response as $record)
+                            <tr>
+                                <td>
+                                    {{ $record['from'] === '<External-Account>'
+                                        ? '<External-Account>'
+                                        : ($record['from'] === Auth::user()['account']
+                                            ? 'Your account'
+                                            : implode('-', str_split($record['from'], 5))) }}
+                                </td>
+                                <td>
+                                    {{ Auth::user()['account'] == $record['to'] ? 'Your account' : implode('-', str_split($record['to'], 5)) }}
+                                </td>
+                                <td>${{ number_format($record['amount'], 2) }} USD</td>
+                                <td class="not-too-interesting">
+                                    {{ isset($record['concept']) ? $record['concept'] : '[No concept]' }}
+                                </td>
+                                <td class="not-too-interesting">{{ $record['created_at'] }}</td>
+                            </tr>
+                        @endforeach
+                    @endif
+                    @if (empty($response))
                         <tr>
-                            <td
-                                style="{{ $record['from'] === '<External-Account>' ? 'color: #aeaeae;font-style: italic;' : '' }}">
-                                    {{
-                                        $record['from'] === '<External-Account>'
-                                            ? '<External-Account>'
-                                            : ($record['from'] === Auth::user()['account']
-                                                ? 'Your account'
-                                                : implode('-', str_split($record['from'], 5))
-                                            )
-                                    }}
-                                    
-                                {{-- {{ ($record['from'] === Auth::user()['account'] ? ' Your account ' : $record['from'] !== '<External-Account>') ? implode('-', str_split($record['from'], 5)) : '<External-Account>' }} --}}
-                            </td>
-                            <td>
-                                {{ Auth::user()['account'] == $record['to'] ? ' Your account ' : implode('-', str_split($record['to'], 5)) }}
-                            </td>
-                            <td>${{ number_format($record['amount'], 2) }} USD</td>
-                            <td
-                                style="max-width: 186px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;{{ !isset($record['concept']) ? 'color: #aeaeae;font-style: italic;' : '' }}">
-                                {{ isset($record['concept']) ? $record['concept'] : '[ No concept ]' }}
-                            </td>
-                            <td>{{ $record['created_at'] }}</td>
+                            <td colspan="5" class="not-found" style="padding: 33px 0; color:gray; text-align: center;">There are no transaction records.</td>
                         </tr>
-                    @endforeach
+                    @endif
                 </tbody>
             </table>
+            <span class="improve">Enhance your experience by visiting the site from your desktop.</span>
+
         </div>
+        <br><br>
     </main>
 </body>

@@ -3,10 +3,24 @@ table.record th {
     font-size: 14px;
 }
 
+span.improve {
+    display: none;
+}
+
 table.record td,
 table.record th {
     border: none;
     border-bottom: 1px solid #a6a6a674;
+}
+
+table.record {
+    width: 100%;
+}
+
+table.record th {
+    color: #747474;
+    font-weight: 400;
+    padding: 8px 6px;
 }
 
 table.record th i {
@@ -21,25 +35,67 @@ table.record th.active i {
 }
 
 table.record td {
+    text-align: left;
     font-weight: 400;
     font-size: 15px;
     padding: 5px 10px;
+    color: #4c4c4c;
 }
 
 div.records {
     background-color: white;
-    width: fit-content;
+    width: 80%;
     margin: auto;
-    padding: 20px 50px;
+    padding: 35px 50px;
     border-radius: 5px;
     margin-top: 30px;
     padding-bottom: 50px;
 }
 
-input[type=search]{
+div.records h2 {
+    font-weight: 400;
+    font-size: 25px;
+    color: #334152;
+    margin-bottom: 5px;
+}
+
+
+input[type=search] {
     margin-bottom: 20px;
 }
 
-div.records h2{
-    margin-bottom: 20px;
+div.records p {
+    margin-top: 5px;
+    margin-bottom: 27px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #999;
+}
+
+@media screen and (max-width: 1000px) {
+
+    td.not-too-interesting,
+    th.not-too-interesting,
+    label.not-too-interesting {
+        display: none;
+    }
+
+    table.record td,
+    table.record th {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 150px;
+    }
+
+    table.record td {
+        font-size: 13px;
+    }
+
+    span.improve {
+        display: block;
+        text-align: center;
+        font-size: 12px;
+        color: silver;
+        margin-top: 35px;
+    }
 }

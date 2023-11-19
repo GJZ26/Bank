@@ -1,19 +1,32 @@
+<script>
+    function myFunction(x) {
+        x.classList.toggle("change");
+        document.getElementById('tabs').classList.toggle('collapsed');
+    }
+</script>
 <nav>
     <div class="logo">
         <img src={{ asset('images/logoRed.png') }} alt="Logo">
     </div>
     <div class="client-info">
-        <img src={{ asset('images/default-avatar.png') }} alt="Default Avatar">
-        <div class="info">
-            <h2>
-                {{ explode(' ', Auth::user()['name'])[0] }} {{ explode(' ', Auth::user()['lastname'])[0] }}
-            </h2>
-            <p>
-                {{ Auth::user()['role'] === 'client' ? 'Standard' : 'Admin' }} Account
-            </p>
+        <div class="profile">
+            <img src={{ asset('images/default-avatar.png') }} alt="Default Avatar">
+            <div class="info">
+                <h2>
+                    {{ explode(' ', Auth::user()['name'])[0] }} {{ explode(' ', Auth::user()['lastname'])[0] }}
+                </h2>
+                <p>
+                    {{ Auth::user()['role'] === 'client' ? 'Standard' : 'Admin' }} Account
+                </p>
+            </div>
+        </div>
+        <div class="container" onclick="myFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
         </div>
     </div>
-    <div class="tabs">
+    <div class="tabs collapsed" id="tabs">
 
 
         <a href="/dashboard" {{ str_contains(request()->path(), 'dashboard') ? 'class=active' : '' }}>

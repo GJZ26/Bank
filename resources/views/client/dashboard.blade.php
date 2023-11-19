@@ -1,43 +1,43 @@
 @include('partials.head', ['title' => 'Dashboard - ' . Auth::user()['name']])
 <script>
-    function copyToClipboard(text) {
+    function copy_text_to_clipboard(text) {
         navigator.clipboard.writeText(text).then(
             () => {
                 console.log("Account number copied")
             },
             (e) => {
-                console.error("somthing went wrong")
+                console.error("Somehing went wrong")
                 console.error(e)
             },
         );
     }
-    async function obtenerTasaDeCambio(moneda) {
-        const response = await fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${moneda}/`);
+    async function get_exchange_value_of(coin) {
+        const response = await fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${coin}/`);
         const data = await response.json();
         return data;
     }
 
-    function calcularReglaDeTres(valor1, cantidad1, valor2) {
-        return (cantidad1 * valor2) / valor1;
+    function relative_value_calculation(first_value, amount, second_value) {
+        return (amount * second_value) / first_value;
     }
 
-    async function letsDoIt() {
+    async function calculate_current_exhange() {
 
         const [usdData, cadData, mxnData] = await Promise.all([
-            obtenerTasaDeCambio('usd'),
-            obtenerTasaDeCambio('cad'),
-            obtenerTasaDeCambio('mxn')
+            get_exchange_value_of('usd'),
+            get_exchange_value_of('cad'),
+            get_exchange_value_of('mxn')
         ]);
 
 
-        const usdmxn = calcularReglaDeTres(usdData.rates[0].mid, 1, mxnData.rates[0].mid);
-        const mxnusd = calcularReglaDeTres(mxnData.rates[0].mid, 1, usdData.rates[0].mid);
+        const usdmxn = relative_value_calculation(usdData.rates[0].mid, 1, mxnData.rates[0].mid);
+        const mxnusd = relative_value_calculation(mxnData.rates[0].mid, 1, usdData.rates[0].mid);
 
-        const usdcad = calcularReglaDeTres(usdData.rates[0].mid, 1, cadData.rates[0].mid);
-        const cadusd = calcularReglaDeTres(cadData.rates[0].mid, 1, usdData.rates[0].mid);
+        const usdcad = relative_value_calculation(usdData.rates[0].mid, 1, cadData.rates[0].mid);
+        const cadusd = relative_value_calculation(cadData.rates[0].mid, 1, usdData.rates[0].mid);
 
-        const cadmxn = calcularReglaDeTres(cadData.rates[0].mid, 1, mxnData.rates[0].mid);
-        const mxncad = calcularReglaDeTres(mxnData.rates[0].mid, 1, cadData.rates[0].mid);
+        const cadmxn = relative_value_calculation(cadData.rates[0].mid, 1, mxnData.rates[0].mid);
+        const mxncad = relative_value_calculation(mxnData.rates[0].mid, 1, cadData.rates[0].mid);
 
         document.getElementById('usdmxn').textContent = `$${usdmxn.toFixed(2)} USD`;
         document.getElementById('mxnusd').textContent = `$${mxnusd.toFixed(2)} MXN`;
@@ -47,21 +47,20 @@
         document.getElementById('mxncad').textContent = `$${mxncad.toFixed(2)} MXN`;
     }
 
-    letsDoIt()
+    calculate_current_exhange()
 </script>
 
-<style>
+{{-- <style>
     table tbody td {
         font-size: 12px;
         width: 100px;
         font-weight: bold;
         aspect-ratio: 1/1;
     }
-</style>
-
+</style> --}}
 <body>
     @include('partials.nav')
-    <main style="margin-left: 224px">
+    <main class="dash">
         <div class="main-container">
             <div class="greeting">
                 <h2>Welcome back, <strong>{{ explode(' ', Auth::user()['name'])[0] }}</strong>.</h2>
@@ -89,7 +88,7 @@
                     <div class="info-seg">
                         <span>Account number</span>
                         <p>{{ implode('-', str_split(Auth::user()['account'], 5)) }} <button
-                                onclick="copyToClipboard('{{ Auth::user()['account'] }}')"><i
+                                onclick="copy_text_to_clipboard('{{ Auth::user()['account'] }}')"><i
                                     class="fa-regular fa-copy"></i></button></p>
                     </div>
                     <div class="info-seg">
@@ -101,8 +100,7 @@
                         <p>{{ Auth::user()['email'] }}</p>
                     </div>
                 </div>
-                <hr>
-                <table>
+                <table class="exchange">
                     <tbody>
                         <tr>
                             <td></td>

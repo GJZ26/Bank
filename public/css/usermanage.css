@@ -32,21 +32,59 @@ div.records.user button {
     color: white;
 }
 
-button.edit{
+button.edit {
     background-color: rgb(0, 145, 255);
 }
 
-button.edit:hover{
+button.edit:hover {
     background-color: rgb(0, 98, 255);
     transition: all 200ms;
 }
 
-button.delete{
+button.delete {
     background-color: rgb(220, 0, 0);
     transition: all 200ms;
 }
 
-button.delete:hover{
+button.delete:hover {
     background-color: rgb(255, 0, 0);
     transition: all 200ms;
+}
+
+@media screen and (max-width: 900px) {
+    div.records.user table.records td {
+        font-size: 13px;
+    }
+
+    table.record td,
+    table.record th {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 42px;
+    }
+
+    div.records.user {
+        background-color: white;
+        width: 80%;
+        margin: auto;
+        padding: 35px 50px 0px 35px;
+        border-radius: 5px;
+        margin-top: 30px;
+        padding-bottom: 50px;
+    }
+
+
+    div.records.user {
+        background-color: white;
+        width: 80%;
+        margin: auto;
+        padding: 35px 50px 0px 47px;
+        border-radius: 5px;
+        margin-top: 30px;
+        padding-bottom: 50px;
+    }
+
+    div.records.user h2 {
+        text-align: center;
+    }
 }

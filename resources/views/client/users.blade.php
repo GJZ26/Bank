@@ -41,7 +41,7 @@
                     <tr>
                         <td>ID</td>
                         <td>Name</td>
-                        <td>Lastname</td>
+                        <td class="not-too-interesting">Lastname</td>
                         <td>Email</td>
                         <td>Actions</td>
                     </tr>
@@ -49,10 +49,18 @@
                         <tr>
                             <td>{{ $admin['id'] }}</td>
                             <td>{{ $admin['name'] }}</td>
-                            <td>{{ $admin['lastname'] }}</td>
+                            <td class="not-too-interesting">{{ $admin['lastname'] }}</td>
                             <td>{{ $admin['email'] }}</td>
-                            <td>
-                                <a href={{ url('/users/' . $admin['id']) }} style="color: #fff">
+                            <td
+                                style="
+                            display: flex;
+                            align-items: center;
+                            align-content: center;
+                            justify-content: flex-start;
+                            gap: 6px;
+                            flex-wrap: wrap;
+                        ">
+                                <a href={{ url('/users/' . $admin['id']) }}>
                                     <button class="edit"><i class="fa-solid fa-pen"></i></button>
                                 </a>
                                 @if (Auth::user()['id'] != $admin['id'])
@@ -70,10 +78,10 @@
             <table class="record">
                 <tbody>
                     <tr>
-                        <td>ID</td>
+                        <td class="not-too-interesting">ID</td>
                         <td>Name</td>
-                        <td>Lastname</td>
-                        <td>Account</td>
+                        <td class="not-too-interesting">Lastname</td>
+                        <td class="not-too-interesting">Account</td>
                         <td>Balance</td>
                         <td>Email</td>
                         <td>Status</td>
@@ -81,16 +89,24 @@
                     </tr>
                     @foreach ($clients as $client)
                         <tr>
-                            <td>{{ $client['id'] }}</td>
+                            <td class="not-too-interesting">{{ $client['id'] }}</td>
                             <td>{{ $client['name'] }}</td>
-                            <td>{{ $client['lastname'] }}</td>
-                            <td>{{ substr($client['account'], 0, 4) . '###' . substr($client['account'], -4) }}</td>
+                            <td class="not-too-interesting">{{ $client['lastname'] }}</td>
+                            <td class="not-too-interesting">{{ substr($client['account'], 0, 4) . '###' . substr($client['account'], -4) }}</td>
                             <td>${{ number_format($client['balance'], 2) }} USD</td>
                             <td>{{ $client['email'] }}</td>
                             <td class="{{ $client['isActive'] ? 'active' : 'inactive' }}">
                                 {{ $client['isActive'] ? 'Active' : 'Inactive' }}</td>
-                            <td>
-                                <a href={{ url('/users/' . $client['id']) }} style="color: #fff">
+                            <td
+                            style="
+                        display: flex;
+                        align-items: center;
+                        align-content: center;
+                        justify-content: flex-start;
+                        gap: 6px;
+                        flex-wrap: wrap;
+                    ">
+                                <a href={{ url('/users/' . $client['id']) }}>
                                     <button class="edit">
                                         <i class="fa-solid fa-pen"></i>
                                     </button>

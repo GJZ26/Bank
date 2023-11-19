@@ -41,10 +41,10 @@
 
                 <div class="horizontal-input">
                     <label for="password">New password</label>
-                    <div>
-                        <label for="show">Show</label>
+                    <div class="hori">
+                        <label for="show" class="not-too-interesting">Show</label>
                         <input type="checkbox" name="show" id="show" onchange="toggleInputPass(event)">
-                        <input type="password" name="password" id="password" placeholder="Password" autocomplete="off">
+                        <input type="password" name="password" id="password" placeholder="Password" class="nomarge" autocomplete="off">
                     </div>
                 </div>
 
@@ -54,43 +54,38 @@
                         placeholder="Beginning balance" autocomplete="off" step="0.01">
                 </div>
                 <hr>
-                <div>
+                <div class="hori">
                     <label for="admin">Administrator Account</label>
                     <input type="radio" name="role" id="admin" value="admin"
-                        {{ $data->role === 'admin' ? 'checked' : '' }}>
+                        {{ $data->role === 'admin' ? 'checked' : '' }}
+                        {{ $data->id === Auth::user()['id'] ? 'disabled' : '' }}>
                 </div>
 
-                <div>
+                <div class="hori">
                     <label for="client">Client Account</label>
                     <input type="radio" name="role" id="client" value="client"
-                        {{ $data->role === 'client' ? 'checked' : '' }}>
+                        {{ $data->role === 'client' ? 'checked' : '' }}
+                        {{ $data->id === Auth::user()['id'] ? 'disabled' : '' }}>
                 </div>
                 <hr>
 
-                <div>
+                <div class="hori">
                     <label for="isActive">Activate Account</label>
                     <label class="switch">
-                        <input type="checkbox" name="isActive" id="isActive" {{ $data->isActive ? 'checked' : '' }}>
+                        <input type="checkbox" name="isActive" id="isActive" {{ $data->id === Auth::user()['id'] ? 'disabled' : '' }} {{ $data->isActive ? 'checked' : '' }}>
                         <span class="slider"></span>
                     </label>
                 </div>
 
                 <hr>
                 <input type="submit" value="Update">
-                <a href="/users" style="margin-left: 18px;font-weight: 400;">Back</a>
+                <a href="/users">Back</a>
 
             </form>
         @else
-            <h1 style="
-        text-align: center;
-        font-size: 28px;
-        margin-top: 167px;
-    ">Oops, the
+            <h1>Oops, the
                 user with the given ID has not been found.</h1>
-            <p style="
-        text-align: center;
-        margin-top: 15px;
-    ">This user does not exist. <a
+            <p>This user does not exist. <a
                     href="/users">Get back</a></p>
         @endif
         <br><br>
