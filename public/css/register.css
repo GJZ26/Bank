@@ -1,7 +1,7 @@
 main form {
     padding: 56px 36px;
     background-color: white;
-    width: fit-content;
+    max-width: 460px;
     border-radius: 6px;
     box-shadow: -1px 1px 7px 0px #6262620f;
     margin: 40px auto;
@@ -213,7 +213,7 @@ div.input {
     margin: 0;
 }
 
-div.input i {
+div.input svg {
     position: absolute;
     color: #9f9f9f;
     margin-top: 17px;

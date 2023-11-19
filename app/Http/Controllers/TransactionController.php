@@ -29,7 +29,7 @@ class TransactionController extends Controller
                     'to' => $transaction->to,
                     'amount' => $transaction->amount,
                     'concept' => $transaction->concept,
-                    'created_at' => Carbon::parse($transaction->created_at)->format('F jS, Y \a\t H:i') ." ". $timezone,
+                    'created_at' => Carbon::parse($transaction->created_at)->format('Y-m-d')
                 ];
             })
             ->toArray();
@@ -90,7 +90,7 @@ class TransactionController extends Controller
 
         try {
             $record = new Transaction([
-                "from" => Auth::user()["role"] === "client" ?  Auth::user()["account"] : "<External-Account>",
+                "from" => Auth::user()["account"],
                 "to" => $recipientAccount,
                 "amount" => $amount,
                 "concept" => $request->has("concept") ? $request->input("concept") : ""

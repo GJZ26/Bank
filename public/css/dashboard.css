@@ -11,7 +11,6 @@ main h1 {
 
 main div.main-container {
     width: fit-content;
-    margin: auto;
     padding: 50px 20px;
 }
 
@@ -30,6 +29,8 @@ main div.exchange {
     padding: 40px 60px;
     border-radius: 5px;
     box-shadow: -1px 1px 7px 0px #6262620f;
+    margin-top: 45px;
+    margin-left: 78px; width:500px
 }
 
 main div.balance {

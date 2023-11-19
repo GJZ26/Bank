@@ -75,10 +75,27 @@
         }
 
     }
+
+    img.whitelogo {
+        position: absolute;
+        left: 60px;
+        top: 50px;
+        min-width: 211px;
+    }
+
+    @media (max-width: 600px) {
+        img.whitelogo {
+            position: absolute;
+            left: 30px;
+            top: 34px;
+            min-width: 200px;
+        }
+    }
 </style>
 
 <body>
     <div class="overlay">
+        <img src="{{ url('/images/logo_name.svg') }}" alt="" class="whitelogo">
         <form action="{{ url('/auth') }}" method="POST">
             @csrf
             <img src="images/logoRed.png" alt="Logo">

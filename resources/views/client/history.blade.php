@@ -5,15 +5,14 @@
     <main>
         <div class="records">
             <h2>Transactions</h2>
-            <p>All records of transactions sent and received.</p>
+            <p>Corporate & Investment Banking</p>
             {{-- <input type="search" name="search" id="search" placeholder="Search" autocomplete="off"> --}}
             <table class="record">
                 <thead>
                     <tr>
-                        <th>Sender's Account</th>
-                        <th>Recipient's Account</th>
+                        <th>Account Number</th>
                         <th>Amount</th>
-                        <th class="not-too-interesting">Concept</th>
+                        <th class="not-too-interesting">Transaction</th>
                         <th class="not-too-interesting">Date</th>
                     </tr>
                 </thead>
@@ -22,18 +21,11 @@
                         @foreach ($response as $record)
                             <tr>
                                 <td>
-                                    {{ $record['from'] === '<External-Account>'
-                                        ? '<External-Account>'
-                                        : ($record['from'] === Auth::user()['account']
-                                            ? 'Your account'
-                                            : implode('-', str_split($record['from'], 5))) }}
+                                    {{ str_repeat('*', 6) . substr($record['from'], -4) }}
                                 </td>
-                                <td>
-                                    {{ Auth::user()['account'] == $record['to'] ? 'Your account' : implode('-', str_split($record['to'], 5)) }}
-                                </td>
-                                <td>${{ number_format($record['amount'], 2) }} USD</td>
+                                <td>${{ number_format($record['amount'], 2) }}</td>
                                 <td class="not-too-interesting">
-                                    {{ isset($record['concept']) ? $record['concept'] : '[No concept]' }}
+                                    {{ isset($record['concept']) ? $record['concept'] : '' }}
                                 </td>
                                 <td class="not-too-interesting">{{ $record['created_at'] }}</td>
                             </tr>
@@ -41,7 +33,8 @@
                     @endif
                     @if (empty($response))
                         <tr>
-                            <td colspan="5" class="not-found" style="padding: 33px 0; color:gray; text-align: center;">There are no transaction records.</td>
+                            <td colspan="5" class="not-found" style="padding: 33px 0; color:gray; text-align: center;">
+                                There are no transaction records.</td>
                         </tr>
                     @endif
                 </tbody>

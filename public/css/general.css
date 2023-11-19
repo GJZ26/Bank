@@ -87,18 +87,6 @@ button.delete:disabled:hover i {
     background-color: #6b6b6b;
 }
 
-a.notificated::after {
-    content: "";
-    position: absolute;
-    background-color: red;
-    color: white;
-    height: 8px;
-    font-size: 11px;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    text-align: center;
-    translate: 20px 10px;
-}
 
 a {
     color: rgb(0, 106, 255);
@@ -189,10 +177,14 @@ div.tabs {
 }
 
 div.tabs a {
-    display: block;
+    display: flex;
     text-decoration: none;
     color: rgb(84, 84, 84);
     padding: 20px 0px 20px 27px;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    column-gap: 15px;
 }
 
 div.tabs a.active {
@@ -204,9 +196,6 @@ div.tabs a:hover {
     background-color: #f2f4f8;
 }
 
-div.tabs a i {
-    margin-right: 12px;
-}
 
 table.exchange tbody td {
     font-size: 12px;
@@ -224,29 +213,38 @@ div.two-segment {
     row-gap: 50px;
 }
 
-table.exchange tr:not(:last-child) td{
+table.exchange tr:not(:last-child) td {
     border-bottom: 1px solid #f0f3fa;
 }
 
-table.exchange tr td:not(:last-child){
+table.exchange tr td:not(:last-child) {
     border-right: 1px solid #f0f3fa;
 }
 
-p.messageCentered{
+p.messageCentered {
     margin-top: 0px;
 }
 
-button i { 
+button i {
     cursor: pointer;
 }
 
-div.hori{
+div.hori {
     align-items: center;
 }
 
 @media screen and (max-width: 1200px) {
     body {
         flex-direction: column;
+    }
+
+    div.two-segment {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 20px;
+        justify-content: center;
+        row-gap: 50px;
+        min-width: 100vw;
     }
 
     nav {
@@ -279,7 +277,7 @@ div.hori{
         height: 40px;
     }
 
-    
+
 
     main div.balance>p {
         font-size: 40px;
@@ -300,16 +298,17 @@ div.hori{
     }
 
     main div.main-container {
-        padding: 50px 0px;
+        padding: 0px 0px;
     }
 
     main div.info,
     main div.exchange {
-        margin: 5px 0;
-        background-color: white;
-        min-width: fit-content;
         width: 100%;
-        padding: 40px 49px;
+        margin: 28px 0 28px 0px;
+        background-color: white;
+        /* min-width: fit-content; */
+        /* min-width: 100%; */
+        padding: 23px 22px;
         border-radius: 5px;
         box-shadow: -1px 1px 7px 0px #6262620f;
     }
@@ -321,5 +320,5 @@ div.hori{
         color: #a5a5a5;
     }
 
-    
+
 }

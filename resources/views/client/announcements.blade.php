@@ -46,7 +46,18 @@
     @include('partials.nav')
     <main>
 
-        <h1 class="centered">Announcements</h1>
+        <h1 style="margin-left: 48px;
+        margin-top: 20px;
+        font-weight: 300;
+        color: #4d4d4d;">
+            Announcements</h1>
+        <p style="
+            margin-left: 48px;
+    margin-top: -1px;
+    font-weight: 300;
+    color: #9f9f9f;">
+            Corporate & Investment Banking
+        </p>
 
         @if (Auth::user()['role'] == 'admin')
 
@@ -98,10 +109,10 @@
 
                 </div>
             @endforeach
-        @else
+        {{-- @else
             <p style="text-align: center;font-size: 15px;color: #9f9f9f;" class="messageCentered">
                 There are no announcements yet.
-            </p>
+            </p> --}}
         @endif
 
         <br><br>
