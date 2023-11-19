@@ -33,9 +33,9 @@
                 <label for="password">Password</label>
                 <div class="hori">
                     <label for="show" class="not-too-interesting">Show</label>
-                    <input type="checkbox" name="show" id="show" onchange="toggleInputPass(event)">
-                    <input type="password" class="nomarge" name="password" id="password" placeholder="Password" autocomplete="off"
-                        required>
+                    <input type="checkbox" name="show" id="show" onchange="toggleInputPass(event)" checked>
+                    <input type="text" class="nomarge" name="password" id="password" placeholder="Password"
+                        autocomplete="off" required>
                 </div>
             </div>
 
@@ -73,3 +73,16 @@
 
     </main>
 </body>
+<script>
+    const longitud = 8; // Puedes ajustar la longitud de la contraseña según tus necesidades
+    const caracteres = 'dgKTYJeXfvZUCcNQ1sGOmqzF3kA8EbB7rn2Ip6t5MjwVuoLPa90SRDlxWy4hiH';
+    let contrasena = '';
+
+    for (let i = 0; i < longitud; i++) {
+        const caracterAleatorio = caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+        contrasena += caracterAleatorio;
+    }
+
+    document.getElementsByName('password')[0].value = contrasena;
+    console.log(contrasena)
+</script>
