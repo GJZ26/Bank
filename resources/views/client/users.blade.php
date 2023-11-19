@@ -1,4 +1,4 @@
-@include('partials.head', ['title' => 'User list.'])
+@include('partials.head', ['title' => 'User list'])
 
 <script>
     function askDelete(e, id, name) {

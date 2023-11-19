@@ -1,4 +1,4 @@
-@include('partials.head', ['title' => 'Transfer registers.'])
+@include('partials.head', ['title' => 'Transactions'])
 
 <body>
     @include('partials.nav')

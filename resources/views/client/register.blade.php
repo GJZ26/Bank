@@ -1,4 +1,4 @@
-@include('partials.head', ['title' => 'Register a new user.'])
+@include('partials.head', ['title' => 'Register a new user'])
 <body>
     @include('partials.nav')
 

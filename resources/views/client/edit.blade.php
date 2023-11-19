@@ -1,4 +1,4 @@
-@include('partials.head', ['title' => 'Edit user information'])
+@include('partials.head', ['title' => 'Edit User Information'])
 
 
 <body>

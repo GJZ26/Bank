@@ -1,4 +1,4 @@
-@include('partials.head', ['title' => 'Dashboard - ' . Auth::user()['name']])
+@include('partials.head', ['title' => 'Dashboard'])
 <script>
     function copy_text_to_clipboard(text) {
         navigator.clipboard.writeText(text).then(
@@ -58,6 +58,7 @@
         aspect-ratio: 1/1;
     }
 </style> --}}
+
 <body>
     @include('partials.nav')
     <main class="dash">
@@ -83,7 +84,7 @@
                     <hr>
                     <div class="info-seg">
                         <span>Account type</span>
-                        <p>{{Auth::user()['role'] === 'client' ? 'Standard' : 'Admin'}}</p>
+                        <p>{{ Auth::user()['role'] === 'client' ? 'Standard' : 'Admin' }}</p>
                     </div>
                     <div class="info-seg">
                         <span>Account number</span>

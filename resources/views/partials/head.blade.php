@@ -1,7 +1,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ isset($title) ? $title : 'Clienthub' }}</title>
+    <title>{{ isset($title) ? $title . ' - ' : ' - Client Hub' }}{{ config('app.name') }}</title>
 
     <link rel="stylesheet" href="{{ asset('css/ad.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
