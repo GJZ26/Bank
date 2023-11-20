@@ -323,7 +323,7 @@
                                                             <p style="font-size: 14px; line-height: 140%;"><span
                                                                     style="font-size: 18px; line-height: 25.2px; color: #666666;">We
                                                                     have sent you this email in response to your request
-                                                                    to reset your password on Scitbank.</span></p>
+                                                                    to reset your password on Santander.</span></p>
                                                             <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
                                                             <p style="font-size: 14px; line-height: 140%;"><span
                                                                     style="font-size: 18px; line-height: 25.2px; color: #666666;">To
