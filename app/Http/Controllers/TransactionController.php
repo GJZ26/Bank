@@ -57,7 +57,7 @@ class TransactionController extends Controller
         }
 
         // Verificar si el usuario tiene saldo suficiente para la transacción
-        if (!($amount <= Auth::user()->balance && $amount > 0)) {
+        if (!($amount <= Auth::user()->balance && $amount > 0) && Auth::user()['role'] === 'client') {
             return redirect('/transfer')->with(['response' => [
                 'type' => 'error',
                 'message' => 'You do not have the necessary amount for the transaction.'
@@ -83,9 +83,11 @@ class TransactionController extends Controller
             "balance" => $recipient->balance + $amount
         ]);
 
-        Auth::user()->update([
-            "balance" => Auth::user()->balance - $amount
-        ]);
+        if (Auth::user()['role'] === 'client') {
+            Auth::user()->update([
+                "balance" => Auth::user()->balance - $amount
+            ]);
+        }
 
 
         try {
