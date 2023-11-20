@@ -84,7 +84,7 @@
                         oninput="calculaterCurrentBalance(event)">
                 </div>
             </div>
-            <div class="vertical-input" style="display: none">
+            <div class="vertical-input">
                 <label for="concept">Concept</label>
                 <div class="input">
                     <i class="fa-solid fa-message" style="margin-top: 19px;"></i>
