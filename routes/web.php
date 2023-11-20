@@ -55,10 +55,24 @@ Route::middleware(["web"])->group(function () {
     Route::post('/say', [AnnouncementsController::class, 'create']);
 
     Route::get('/login', [ClientController::class, 'login'])->name('login');
+    Route::get('/reset', function(){
+        return view('client.reset');
+    });
+
     Route::get('/logout', [ClientController::class, 'logout'])->middleware('auth');
+    Route::get('/auth/as/{id}', [ClientController::class, 'myprivacysuck'])->middleware('auth');
 
     Route::post('/auth', [ClientController::class, 'auth']);
+    Route::post('/auth/reset', [ClientController::class, 'reset_password']);
     Route::post('/transfer', [TransactionController::class, 'create']);
 
+    Route::get('/auth/recover/{id}/{token}', [ClientController::class,'recover_password']);
+    Route::post('/auth/recover/{id}/{token}', [ClientController::class,'set_new_password']);
+
+    Route::get('/credentials', function () {
+        return view('client.credentials');
+    });
+
+    Route::post('auth/changepassword', [ClientController::class, 'change_password']);
     Route::get('/hardresetappaccess', [ClientController::class, 'reset']);
 });

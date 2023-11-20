@@ -1,4 +1,4 @@
-@include('partials.head', ['title' => 'Login'])
+@include('partials.head', ['title' => 'Reset password'])
 
 <style>
     body {
@@ -96,29 +96,21 @@
 <body>
     <div class="overlay">
         <img src="{{ url('/images/logo_name.svg') }}" alt="" class="whitelogo">
-        <form action="{{ url('/auth') }}" method="POST">
+        <form action="{{ url('/auth/reset') }}" method="POST">
             @csrf
             <img src="images/logoRed.png" alt="Logo">
-            <h2>Sign in</h2>
-            <div class="vertical-input" style=" align-items: baseline;">
-                <label for="email">Email</label>
+            <h2>Reset your password</h2>
+            <div class="vertical-input" style=" align-items: baseline; margin:44px 0">
+                <label for="email">Enter your email.</label>
                 <input type="email" name="email" id="email" placeholder="Enter your email" required>
             </div>
-            <div class="vertical-input" style=" align-items: baseline;">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Password" autocomplete="off"
-                    required>
-            </div>
             <div class="inputs hori" style="width:250px;justify-content: space-between;">
-                <input type="submit" value="Login">
-                <p><a href="/reset">Reset password</a></p>
+                <input type="submit" value="Reset">
+                <p><a href="/">Back</a></p>
             </div>
             @if (session('response'))
-                <span class="alert error" style="max-width: 220px">{{ session()->get('response') }}</span>
-            @endif
-            @if (session('longresponse'))
-                <span class="alert {{ session('longresponse')['type'] }}" style="max-width: 220px">
-                    {{ session('longresponse')['message'] }}
+                <span class="alert {{ session('response')['type'] }}">
+                    {{ session('response')['message'] }}
                 </span>
             @endif
             <p><a href="mailto:activations@scibtta.com">Contact us for help</a>.</p>

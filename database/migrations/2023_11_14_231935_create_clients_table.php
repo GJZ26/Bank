@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('lastname');
             $table->string('email');
             $table->string('password');
+            $table->string('reset_token')->nullable(true);
+            $table->timestamp('token_valid')->nullable(true);
             $table->enum('role', ['admin', 'client']);
             $table->string('account')->unique();
             $table->unsignedFloat('balance');

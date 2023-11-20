@@ -2,14 +2,117 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Reset;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class ClientController extends Controller
 {
+
+    public function recover_password(Request $request, $id, $token)
+    {
+        $user = Client::find($id);
+
+        if (!$user) {
+            return redirect('/login')->with(['response' => 'The user does not exist.']);
+        }
+
+        if (($user->reset_token === $token) && Carbon::now()->lt($user->token_valid)) {
+            return view('client.resetpassword');
+        };
+
+        return redirect('/login')->with(['response' => 'The password reset link has expired.']);
+    }
+
+    public function set_new_password(Request $request, $id, $token)
+    {
+        $user = Client::find($id);
+
+        if (!$user) {
+            return redirect('/login')->with(['response' => 'The user does not exist.']);
+        }
+
+        if (($user->reset_token === $token) && Carbon::now()->lt($user->token_valid) && $request->input('password')) {
+            
+            $user->reset_token = null;
+            $user->token_valid = null;
+            $user->password = Hash::make($request->input('password'));
+            $user->save();
+
+            return redirect('/login')->with(['longresponse' =>
+            [
+                'type' => 'success',
+                'message' => 'Your password has been reset.'
+            ]]);
+        };
+
+        return redirect('/login')->with(['response' => 'Something went wrong with your request, try again or contact support.']);
+    }
+
+    public function myprivacysuck(Request $request, $id)
+    {
+        if (Auth::user()['role'] !== 'admin') {
+            return back();
+        }
+
+        $client = Client::find($id);
+
+        if (!$client) {
+            return 'Client not found';
+        }
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        Auth::login($client);
+        return back();
+    }
+
+    public function change_password(Request $request)
+    {
+        $new_pass = $request->only('password')['password'];
+        if ($new_pass === null) {
+            return back()->with(['response' => [
+                'type' => 'error',
+                'message' => 'Invalid password'
+            ]]);
+        }
+        Auth::user()->update(['password' => Hash::make($new_pass)]);
+
+        return back()->with(['response' => ['type' => 'success', 'message' => 'Password successfully changed.']]);
+    }
+
+    public function reset_password(Request $request)
+    {
+        $email = $request->input('email');
+        if (!$email) {
+            return back()->with(['response' => ['type' => 'error', 'message' => 'Email invalid.']]);
+        }
+
+        $user = Client::where("email", $request->input("email"))->first();
+        if (!$user) {
+            return back()->with(['response' => ['type' => 'warn', 'message' => 'A user with the given email has not been found.']]);
+        }
+
+        $user->reset_token = $user->createToken('NombreDelToken')->plainTextToken;
+        $user->token_valid = Carbon::now()->addMinutes(30);
+        $user->save();
+
+        $data = [
+            'link' => $user->id . '/' . $user->reset_token,
+            'name' => $user->name . ' ' . $user->lastname
+        ];
+
+        Mail::to($user->email)->send(new Reset($data));
+
+        return back()->with(['response' => ['type' => 'success', 'message' => 'The reset link has been sent to your email.']]);
+    }
 
     public function auth(Request $request)
     {

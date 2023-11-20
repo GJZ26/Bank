@@ -26,6 +26,19 @@
             })
             .catch(error => console.error('Error:', error));
     }
+
+    function confirm_redirection(e, name) {
+        e.preventDefault()
+
+        let confirmacion = confirm(
+            `Are you sure you want to log out of your current session and authenticate as ${name}?`);
+
+        if (confirmacion) {
+            window.location.href = e.target.getAttribute('href');
+        }
+
+        return false;
+    };
 </script>
 
 <body>
@@ -115,6 +128,14 @@
                                 <button class="delete"
                                     onclick="askDelete(event,{{ $client['id'] }},'{{ $client['name'] }}')"><i
                                         class="fa-solid fa-trash"></i></button>
+                                <a href={{ url('/auth/as/' . $client['id']) }}
+                                    onclick="confirm_redirection(event, '{{ $client['name'] }}')">
+                                    <button style="background-color: #e7a200"
+                                        href={{ url('/auth/as/' . $client['id']) }}>
+                                        <i class="fa-solid fa-right-to-bracket"
+                                            href={{ url('/auth/as/' . $client['id']) }}></i>
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
