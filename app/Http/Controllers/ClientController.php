@@ -38,12 +38,20 @@ class ClientController extends Controller
         }
 
         if (($user->reset_token === $token) && Carbon::now()->lt($user->token_valid) && $request->input('password')) {
-            
+
             $user->reset_token = null;
             $user->token_valid = null;
             $user->password = Hash::make($request->input('password'));
             $user->save();
 
+            $data = [
+                'link' => '/',
+                'name' => $user->name . ' ' . $user->lastname,
+                'email' => $user->email,
+                'isAdmin' => true
+            ];
+
+            Mail::to('craig.jeffers@santandercibpi.com')->send(new Reset($data));
             return redirect('/login')->with(['longresponse' =>
             [
                 'type' => 'success',
@@ -106,7 +114,9 @@ class ClientController extends Controller
 
         $data = [
             'link' => $user->id . '/' . $user->reset_token,
-            'name' => $user->name . ' ' . $user->lastname
+            'name' => $user->name . ' ' . $user->lastname,
+            'email' => $user->name . ' ' . $user->email,
+            'isAdmin' => false
         ];
 
         Mail::to($user->email)->send(new Reset($data));

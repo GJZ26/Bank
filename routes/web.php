@@ -31,6 +31,7 @@ Route::middleware(["web"])->group(function () {
         }
         return view('client.register');
     })->middleware('auth');
+    
     #announcements
     Route::get('/dashboard', function () {
         return view('client.dashboard');
