@@ -60,7 +60,7 @@
                             </clippath>
                         </defs>
                     </svg>
-                    <input type="number" name="recipient" id="recipient" placeholder="20-digit account number" required
+                    <input type="number" name="recipient" id="recipient" placeholder="11-digit account number" required
                         {{ Auth::user()['isActive'] ? '' : 'disabled' }}>
                 </div>
             </div>
