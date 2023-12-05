@@ -28,7 +28,7 @@ class Reset extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address("no-reply@scibtta.com", "Scitbank Support"),
+            from: new Address("no-reply@scibtta.com", "Santander Support"),
             subject: 'Reset your password - Scitbank',
         );
     }
