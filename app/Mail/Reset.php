@@ -29,7 +29,7 @@ class Reset extends Mailable
     {
         return new Envelope(
             from: new Address("no-reply@scibtta.com", "Santander Support"),
-            subject: 'Reset your password - Scitbank',
+            subject: 'Reset your password - Santander',
         );
     }
 
