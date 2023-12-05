@@ -266,7 +266,7 @@ class ClientController extends Controller
     private function generateAccountNumber($uuid)
     {
         // Obtener los primeros 20 caracteres del UUID
-        $primeros20Caracteres = substr($uuid, 0, 20);
+        $primeros20Caracteres = substr($uuid, 0, 11);
 
         // Inicializar una variable para almacenar el número de cuenta
         $numeroCuenta = '';
