@@ -265,19 +265,20 @@ class ClientController extends Controller
 
     private function generateAccountNumber($uuid)
     {
+        $latest_user = Client::latest()->first();
         // Obtener los primeros 20 caracteres del UUID
-        $primeros20Caracteres = substr($uuid, 0, 20);
+        // $primeros20Caracteres =  substr($uuid, 0, 20);
 
-        // Inicializar una variable para almacenar el número de cuenta
-        $numeroCuenta = '';
+        // // Inicializar una variable para almacenar el número de cuenta
+        // $numeroCuenta = '';
 
-        // Calcular el valor ASCII de cada carácter y agregarlo al número de cuenta
-        for ($i = 0; $i < strlen($primeros20Caracteres); $i++) {
-            $numeroCuenta .= ord($primeros20Caracteres[$i]);
-        }
+        // // Calcular el valor ASCII de cada carácter y agregarlo al número de cuenta
+        // for ($i = 0; $i < strlen($primeros20Caracteres); $i++) {
+        //     $numeroCuenta .= ord($primeros20Caracteres[$i]);
+        // }
 
         // Retornar el número de cuenta resultante
-        return substr($numeroCuenta, 0, 11);
+        return '00273849' . (int)substr($latest_user->account, -3) + 1;;
     }
 
 
