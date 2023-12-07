@@ -10,9 +10,9 @@
             <table class="record">
                 <thead>
                     <tr>
-                        <th>Account Number</th>
+                        {{-- <th>Account Number</th> --}}
                         <th>Amount</th>
-                        <th class="not-too-interesting">Transaction</th>
+                        <th>Transaction</th>
                         <th class="not-too-interesting">Date</th>
                     </tr>
                 </thead>
@@ -20,11 +20,11 @@
                     @if (isset($response))
                         @foreach ($response as $record)
                             <tr>
-                                <td>
+                                {{-- <td>
                                     {{ str_repeat('*', 6) . substr($record['from'], -4) }}
-                                </td>
+                                </td> --}}
                                 <td>${{ number_format($record['amount'], 2) }}</td>
-                                <td class="not-too-interesting">
+                                <td>
                                     {{ isset($record['concept']) ? $record['concept'] : '' }}
                                 </td>
                                 <td class="not-too-interesting">{{ $record['created_at'] }}</td>

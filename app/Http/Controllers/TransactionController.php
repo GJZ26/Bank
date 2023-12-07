@@ -99,11 +99,10 @@ class TransactionController extends Controller
             ]);
             $record->save();
         } catch (Exception $e) {
-            return $e;
-            // return redirect('/transfer')->with(['response' => [
-            //     'type' => 'error',
-            //     'message' => 'A server error has occurred, try again later.'
-            // ]]);
+            return redirect('/transfer')->with(['response' => [
+                'type' => 'error',
+                'message' => 'A server error has occurred, try again later.'
+            ]]);
         }
 
         return redirect('/transfer')->with(['response' => [
