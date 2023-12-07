@@ -61,7 +61,7 @@
                         </defs>
                     </svg>
                     <input type="number" name="recipient" id="recipient" placeholder="11-digit account number" required
-                        {{ Auth::user()['isActive'] ? '' : 'disabled' }}>
+                        {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }}>
                 </div>
             </div>
             <div class="vertical-input">
@@ -80,7 +80,7 @@
                     </svg>
                     <input type="number" name="amount" id="amount"
                         min="0" step="0.01" placeholder="Amount to be transferred"
-                        {{ Auth::user()['isActive'] ? '' : 'disabled' }} required
+                        {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }} required
                         oninput="calculaterCurrentBalance(event)">
                 </div>
             </div>
@@ -95,15 +95,15 @@
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <input type="text" name="concept" id="concept" placeholder="Concept"
-                        {{ Auth::user()['isActive'] ? '' : 'disabled' }}>
+                        {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }}>
                 </div>
             </div>
             @endif
             <hr>
-            <input type="submit" value="Transfer" {{ Auth::user()['isActive'] ? '' : 'disabled' }}>
+            <input type="submit" value="Transfer" {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }}>
 
 
-            @if (!Auth::user()['isActive'])
+            @if (!Auth::user()['role'] === 'admin')
                 {{-- <span class="alert warn">
                     Your account is inactive, you cannot make transfers at this time.
                 </span> --}}
