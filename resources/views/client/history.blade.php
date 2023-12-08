@@ -23,7 +23,7 @@
                                 {{-- <td>
                                     {{ str_repeat('*', 6) . substr($record['from'], -4) }}
                                 </td> --}}
-                                <td>${{ number_format($record['amount'], 2) }}</td>
+                                <td>{{ $record['amount'] }}</td>
                                 <td>
                                     {{ isset($record['concept']) ? $record['concept'] : '' }}
                                 </td>

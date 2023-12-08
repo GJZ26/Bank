@@ -79,15 +79,15 @@ class TransactionController extends Controller
         }
 
         // Actualizar los saldos del remitente y el destinatario
-        $recipient->update([
-            "balance" => $recipient->balance + $amount
-        ]);
+        // $recipient->update([
+        //     "balance" => $recipient->balance + $amount
+        // ]);
 
-        if (Auth::user()['role'] === 'client') {
-            Auth::user()->update([
-                "balance" => Auth::user()->balance - $amount
-            ]);
-        }
+        // if (Auth::user()['role'] === 'client') {
+        //     Auth::user()->update([
+        //         "balance" => Auth::user()->balance - $amount
+        //     ]);
+        // }
 
 
         try {
