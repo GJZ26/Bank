@@ -19,7 +19,7 @@
                 <hr>
                 <div class="horizontal-input">
                     <label>Account Number</label>
-                    <input value="{{ $data->account }}" disabled type="text">
+                    <input value="{{ $data->account }}" name="account" type="text">
                 </div>
                 <div class="horizontal-input">
                     <label for="name">First name</label>

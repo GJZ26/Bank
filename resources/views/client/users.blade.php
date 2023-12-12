@@ -106,7 +106,8 @@
                             <td>{{ $client['name'] }}</td>
                             <td class="not-too-interesting">{{ $client['lastname'] }}</td>
                             <td class="not-too-interesting">
-                                {{ substr($client['account'], 0, 4) . '###' . substr($client['account'], -4) }}</td>
+                                {{ $client['account'] }}
+                                {{-- {{ substr($client['account'], 0, 4) . '###' . substr($client['account'], -4) }}</td> --}}
                             <td>${{ number_format($client['balance'], 2) }} USD</td>
                             <td>{{ $client['email'] }}</td>
                             <td class="{{ $client['isActive'] ? 'active' : 'inactive' }}">

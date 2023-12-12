@@ -265,21 +265,17 @@ class ClientController extends Controller
 
     private function generateAccountNumber($uuid)
     {
-        $latest_user = Client::latest()->first();
-        // Obtener los primeros 20 caracteres del UUID
-        // $primeros20Caracteres =  substr($uuid, 0, 20);
+        $latest_user = Client::orderBy('account', 'desc')->first();
 
-        // // Inicializar una variable para almacenar el número de cuenta
-        // $numeroCuenta = '';
+        if ($latest_user) {
+            $account_number = '00273849' . ((int)substr($latest_user->account, -3) + 1);
+        } else {
+            $account_number = '00273849001';
+        }
 
-        // // Calcular el valor ASCII de cada carácter y agregarlo al número de cuenta
-        // for ($i = 0; $i < strlen($primeros20Caracteres); $i++) {
-        //     $numeroCuenta .= ord($primeros20Caracteres[$i]);
-        // }
-
-        // Retornar el número de cuenta resultante
-        return '00273849' . (int)substr($latest_user->account, -3) + 1;;
+        return $account_number;
     }
+
 
 
     /**
@@ -326,8 +322,23 @@ class ClientController extends Controller
             $new_data_to_update["isActive"] = $new_data_to_update["isActive"] === "on";
         }
 
+        $user_to_update = Client::where('id', $id)->first();
+        $account_coincidence = Client::where('account', $new_data_to_update['account'])->first();
+
+        if ($account_coincidence) {
+            if ($user_to_update->id != $account_coincidence->id) {
+                $response = [
+                    'type' => 'error',
+                    'message' => 'A user with this account number already exists.'
+                ];
+
+                return back()->with(['response' => $response]);
+            }
+        }
+
+
         try {
-            Client::where('id', $id)->update($new_data_to_update);
+            $user_to_update->update($new_data_to_update);
             $response = [
                 'type' => 'success',
                 'message' => 'User information successfully updated.'
