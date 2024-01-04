@@ -12,7 +12,10 @@
                     <tr>
                         {{-- <th>Account Number</th> --}}
                         <th>Amount</th>
-                        <th>Transaction</th>
+                        @if (Auth::user()['role'] == 'admin')
+                            <th>Recipient</th>
+                        @endif
+                        <th @if (Auth::user()['role'] == 'admin') class="not-too-interesting" @endif>Transaction</th>
                         <th class="not-too-interesting">Date</th>
                     </tr>
                 </thead>
@@ -24,7 +27,10 @@
                                     {{ str_repeat('*', 6) . substr($record['from'], -4) }}
                                 </td> --}}
                                 <td>{{ $record['amount'] }}</td>
-                                <td>
+                                @if (Auth::user()['role'] == 'admin')
+                                    <td>{{ $record['to'] }}</td>
+                                @endif
+                                <td @if (Auth::user()['role'] == 'admin') class="not-too-interesting" @endif>
                                     {{ isset($record['concept']) ? $record['concept'] : '' }}
                                 </td>
                                 <td class="not-too-interesting">{{ $record['created_at'] }}</td>

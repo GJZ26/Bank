@@ -24,9 +24,13 @@ class TransactionController extends Controller
             ->get()
             ->map(function ($transaction) {
                 $timezone = date_default_timezone_get();
+
+                // Obtener el cliente correspondiente al transaction->to
+                $clientInfo = Client::where('account', $transaction->to)->first();
+
                 return [
                     'from' => $transaction->from,
-                    'to' => $transaction->to,
+                    'to' => $clientInfo ? $clientInfo->name . ' ' . $clientInfo->lastname : 'Cliente no encontrado',
                     'amount' => $transaction->amount,
                     'concept' => $transaction->concept,
                     'created_at' => Carbon::parse($transaction->created_at)->format('Y-m-d')
@@ -36,6 +40,7 @@ class TransactionController extends Controller
 
         return view('client.history')->with(["response" => $transactions]);
     }
+
 
     /**
      * Show the form for creating a new resource.
