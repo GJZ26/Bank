@@ -1,4 +1,31 @@
 @include('partials.head', ['title' => 'Transactions'])
+<script>
+    function askDelete(e, id) {
+        if (!confirm('Are you sure you want to perform this action?' + '\nTHIS ACTION CANNOT BE REVERSED.')) {
+            return;
+        }
+        const btn = e.target.nodeName === 'I' ? e.target.parentNode : e.target
+        btn.disabled = true
+        const uri = "{{ url('/transaction') }}/" + id;
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        };
+        fetch(uri, requestOptions)
+            .then((res) => {
+                if (res.status === 200) {
+                    btn.parentElement.parentNode.parentNode.removeChild(btn.parentElement.parentNode)
+                } else {
+                    console.log(res)
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
 
 <body>
     @include('partials.nav')
@@ -17,6 +44,9 @@
                         @endif
                         <th @if (Auth::user()['role'] == 'admin') class="not-too-interesting" @endif>Transaction</th>
                         <th class="not-too-interesting">Date</th>
+                        @if (Auth::user()['role'] == 'admin')
+                            <th>Action</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +64,20 @@
                                     {{ isset($record['concept']) ? $record['concept'] : '' }}
                                 </td>
                                 <td class="not-too-interesting">{{ $record['created_at'] }}</td>
+                                @if (Auth::user()['role'] == 'admin')
+                                    <td
+                                        style="
+                            display: flex;
+                            align-items: center;
+                            align-content: center;
+                            justify-content: flex-start;
+                            gap: 6px;
+                            flex-wrap: wrap;
+                        ">
+                                        <button class="delete" onclick="askDelete(event,{{ $record['id'] }})"><i
+                                                class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     @endif

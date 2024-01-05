@@ -25,7 +25,8 @@ div.records.user h2 {
     color: #414141;
 }
 
-div.records.user button {
+div.records.user button,
+table.record button {
     cursor: pointer;
     padding: 8px;
     border-radius: 4px;

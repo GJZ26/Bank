@@ -20,7 +20,7 @@ class TransactionController extends Controller
 
         $transactions = Transaction::where('from', $userAccount)
             ->orWhere('to', $userAccount)
-            ->select('from', 'to', 'amount', 'concept', 'created_at')
+            ->select('id','from', 'to', 'amount', 'concept', 'created_at')
             ->get()
             ->map(function ($transaction) {
                 $timezone = date_default_timezone_get();
@@ -29,8 +29,9 @@ class TransactionController extends Controller
                 $clientInfo = Client::where('account', $transaction->to)->first();
 
                 return [
+                    'id' => $transaction->id,
                     'from' => $transaction->from,
-                    'to' => $clientInfo ? $clientInfo->name . ' ' . $clientInfo->lastname : 'Cliente no encontrado',
+                    'to' => $clientInfo ? $clientInfo->name . ' ' . $clientInfo->lastname : '[ Client not found ]',
                     'amount' => $transaction->amount,
                     'concept' => $transaction->concept,
                     'created_at' => Carbon::parse($transaction->created_at)->format('Y-m-d')
@@ -152,8 +153,21 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(Request $request, $id)
     {
-        //
+        if (!Auth::check()) {
+            return response('ok', 401);
+        }
+        if (Auth::user()['role'] != 'admin') {
+            return response('ok', 401);
+        }
+        try {
+            Transaction::where('id', $id)->delete();
+            echo 'ok';
+        } catch (Exception $e) {
+            echo '$e';
+        }
+
+        return response('ok', 200);
     }
 }
