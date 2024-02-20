@@ -39,6 +39,8 @@
             </svg>
             Dashboard
         </a>
+
+        @if (Auth::user()['role'] == 'admin')
         <a href="/transfer" {{ str_contains(request()->path(), 'transfer') ? 'class=active' : '' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -53,6 +55,7 @@
             </svg>
             Transfers
         </a>
+        @endif
 
         <a href="/history" {{ str_contains(request()->path(), 'history') ? 'class=active' : '' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none"
