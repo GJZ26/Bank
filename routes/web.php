@@ -38,6 +38,9 @@ Route::middleware(["web"])->group(function () {
     })->middleware('auth');
 
     Route::get('/transfer', function () {
+        if (Auth::user()['role'] != 'admin') {
+            return redirect('/dashboard');
+        }
         return view('client.transfer');
     })->middleware('auth');
 
