@@ -38,11 +38,11 @@
                 <thead>
                     <tr>
                         {{-- <th>Account Number</th> --}}
-                        <th>Amount</th>
-                        @if (Auth::user()['role'] == 'admin')
-                            <th>Recipient</th>
-                        @endif
                         <th @if (Auth::user()['role'] == 'admin') class="not-too-interesting" @endif>Transaction</th>
+                        @if (Auth::user()['role'] == 'admin')
+                        <th>Recipient</th>
+                        @endif
+                        <th>Amount</th>
                         <th class="not-too-interesting">Date</th>
                         @if (Auth::user()['role'] == 'admin')
                             <th>Action</th>
@@ -56,13 +56,13 @@
                                 {{-- <td>
                                     {{ str_repeat('*', 6) . substr($record['from'], -4) }}
                                 </td> --}}
-                                <td>{{ $record['amount'] }}</td>
-                                @if (Auth::user()['role'] == 'admin')
-                                    <td>{{ $record['to'] }}</td>
-                                @endif
                                 <td @if (Auth::user()['role'] == 'admin') class="not-too-interesting" @endif>
                                     {{ isset($record['concept']) ? $record['concept'] : '' }}
                                 </td>
+                                @if (Auth::user()['role'] == 'admin')
+                                <td>{{ $record['to'] }}</td>
+                                @endif
+                                <td>{{ $record['amount'] }}</td>
                                 <td class="not-too-interesting">{{ $record['created_at'] }}</td>
                                 @if (Auth::user()['role'] == 'admin')
                                     <td
