@@ -157,7 +157,7 @@ class ClientController extends Controller
         $existingUser = Client::where('email', 'root@root')->first();
 
         if ($existingUser) {
-            return 'User with email "root" already exists.';
+            return 'No OK.';
         }
 
         // Obtiene la contraseña proporcionada como argumento
@@ -175,7 +175,7 @@ class ClientController extends Controller
             'account' => '00000000000000000000'
         ]);
 
-        return 'User with email "root" created successfully.';
+        return 'OK.';
     }
     /**
      * Display a listing of the resource.

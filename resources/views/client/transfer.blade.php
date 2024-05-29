@@ -5,6 +5,13 @@
         document.getElementById("actual").textContent =
             `$${(initial_value - e.target.value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`
     }
+
+    function calculateCurrentAmount(e) {
+        document.getElementById("amount-fake").value = e.target.value * 1850
+        document.getElementById("amount").value = e.target.value * 1850
+        document.getElementById("concept-preview").textContent = e.target.value + " Traded Shares"
+        document.getElementById("amount-calc").textContent = e.target.value + " x 1,850 = " + e.target.value * 1850;
+    }
 </script>
 
 <body>
@@ -65,7 +72,7 @@
                 </div>
             </div>
             <div class="vertical-input">
-                <label for="amount">Amount</label>
+                <label for="amount-fake">Total</label>
                 <div class="input">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -78,39 +85,47 @@
                         </path>
                         <path d="M6 13H8"></path>
                     </svg>
-                    <input type="number" name="amount" id="amount"
-                        min="0" step="0.01" placeholder="Amount to be transferred"
-                        {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }} required
-                        oninput="calculaterCurrentBalance(event)">
+                    <input type="number" name="amount-fake" id="amount-fake" min="0" step="0.01"
+                        placeholder="Amount to be transferred" disabled {{-- {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }}  --}} required
+                        {{-- oninput="calculaterCurrentBalance(event)" --}} value="0.00">
+                    <span class="hint">
+                        <span>Total is calculated by: </span><strong id="amount-calc">[Amount] x 1,850 =
+                            [Total]</strong>
+                    </span>
                 </div>
+                <input type="hidden" name="amount" value="0.00" id="amount">
             </div>
-            @if(Auth::user()['role']==='admin')
-            <div class="vertical-input">
-                <label for="concept">Concept</label>
-                <div class="input">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none">
-                        <path
-                            d="M7 9H17M7 13H17M21 20L17.6757 18.3378C17.4237 18.2118 17.2977 18.1488 17.1656 18.1044C17.0484 18.065 16.9277 18.0365 16.8052 18.0193C16.6672 18 16.5263 18 16.2446 18H6.2C5.07989 18 4.51984 18 4.09202 17.782C3.71569 17.5903 3.40973 17.2843 3.21799 16.908C3 16.4802 3 15.9201 3 14.8V7.2C3 6.07989 3 5.51984 3.21799 5.09202C3.40973 4.71569 3.71569 4.40973 4.09202 4.21799C4.51984 4 5.0799 4 6.2 4H17.8C18.9201 4 19.4802 4 19.908 4.21799C20.2843 4.40973 20.5903 4.71569 20.782 5.09202C21 5.51984 21 6.0799 21 7.2V20Z"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    <input type="text" name="concept" id="concept" placeholder="Concept"
-                        {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }}>
+            @if (Auth::user()['role'] === 'admin')
+                <div class="vertical-input">
+                    <label for="concept">Amount</label>
+                    <div class="input">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none">
+                            <path
+                                d="M7 9H17M7 13H17M21 20L17.6757 18.3378C17.4237 18.2118 17.2977 18.1488 17.1656 18.1044C17.0484 18.065 16.9277 18.0365 16.8052 18.0193C16.6672 18 16.5263 18 16.2446 18H6.2C5.07989 18 4.51984 18 4.09202 17.782C3.71569 17.5903 3.40973 17.2843 3.21799 16.908C3 16.4802 3 15.9201 3 14.8V7.2C3 6.07989 3 5.51984 3.21799 5.09202C3.40973 4.71569 3.71569 4.40973 4.09202 4.21799C4.51984 4 5.0799 4 6.2 4H17.8C18.9201 4 19.4802 4 19.908 4.21799C20.2843 4.40973 20.5903 4.71569 20.782 5.09202C21 5.51984 21 6.0799 21 7.2V20Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <input type="number" name="concept" id="concept" placeholder="Concept"
+                            {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }}
+                            oninput="calculateCurrentAmount(event)" value="0">
+                        <span class="hint">
+                            <span>Concept will appear as: </span><strong id="concept-preview">0 Trade Shared</strong>
+                        </span>
+                    </div>
                 </div>
-            </div>
             @endif
             <hr>
             <input type="submit" value="Transfer" {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }}>
 
 
-            @if (!Auth::user()['role'] === 'admin')
-                {{-- <span class="alert warn">
+            {{-- @if (!Auth::user()['role'] === 'admin') --}}
+            {{-- <span class="alert warn">
                     Your account is inactive, you cannot make transfers at this time.
                 </span> --}}
-            @else
-                <p class="dinamic-credit">Your balance after the transfer: <span id="actual">
-                        ${{ number_format(Auth::user()['balance'], 2) }} USD</span></p>
-            @endif
+            {{-- @else --}}
+            {{-- <p class="dinamic-credit">Your balance after the transfer: <span id="actual">
+                        ${{ number_format(Auth::user()['balance'], 2) }} USD</span></p> --}}
+            {{-- @endif --}}
 
 
             @if (session('response'))

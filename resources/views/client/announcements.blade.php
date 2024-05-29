@@ -9,7 +9,10 @@
         btn.disabled = true
 
         const uri = "{{ url('/announcements') }}/" + id;
-
+// Date Transaction y amount
+// Cantidad, x + traded share, x * 1850 => Amount
+// Hasta abajo total - Total de tradeshare.
+// Amount $0.00
         const requestOptions = {
             method: 'DELETE',
             headers: {

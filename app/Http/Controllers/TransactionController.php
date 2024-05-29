@@ -17,16 +17,17 @@ class TransactionController extends Controller
     public function index()
     {
         $userAccount = Auth::user()["account"];
+        $total = 0;
 
         $transactions = Transaction::where('from', $userAccount)
             ->orWhere('to', $userAccount)
-            ->select('id','from', 'to', 'amount', 'concept', 'created_at')
+            ->select('id', 'from', 'to', 'amount', 'concept', 'created_at')
             ->get()
-            ->map(function ($transaction) {
-                $timezone = date_default_timezone_get();
-
+            ->map(function ($transaction) use (&$total) {
                 // Obtener el cliente correspondiente al transaction->to
                 $clientInfo = Client::where('account', $transaction->to)->first();
+
+                $total += $transaction->amount;
 
                 return [
                     'id' => $transaction->id,
@@ -39,8 +40,9 @@ class TransactionController extends Controller
             })
             ->toArray();
 
-        return view('client.history')->with(["response" => $transactions]);
+        return view('client.history')->with(["response" => $transactions, "total" => $total, "count" => count($transactions)]);
     }
+
 
 
     /**
@@ -77,10 +79,17 @@ class TransactionController extends Controller
             ]]);
         }
 
-        if (!Auth::user()['isActive']) {
+        if (!Auth::user()['isActive'] && Auth::user()["role"] === 'client') {
             return redirect('/transfer')->with(['response' => [
                 'type' => 'error',
                 'message' => 'Your account is disabled.'
+            ]]);
+        }
+
+        if ($amount <= 0) {
+            return redirect('/transfer')->with(['response' => [
+                'type' => 'error',
+                'message' => "You cannot transfer amounts less than or equal to zero."
             ]]);
         }
 
@@ -101,7 +110,7 @@ class TransactionController extends Controller
                 "from" => Auth::user()["account"],
                 "to" => $recipientAccount,
                 "amount" => $amount,
-                "concept" => $request->has("concept") ? $request->input("concept") : ""
+                "concept" => $request->has("concept") ? $request->input("concept") . " Traded Shares" : ""
             ]);
             $record->save();
         } catch (Exception $e) {

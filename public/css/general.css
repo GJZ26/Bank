@@ -322,3 +322,19 @@ div.hori {
 
 
 }
+
+span.hint.summary {
+    display: block;
+    text-align: end;
+    font-size: 14px;
+}
+
+span.hint {
+    color: darkgrey;
+    font-size: 12px;
+}
+
+span.hint strong {
+    font-weight: 600;
+    color: #949494;
+}
