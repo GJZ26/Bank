@@ -109,7 +109,7 @@
                             {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }}
                             oninput="calculateCurrentAmount(event)" value="0">
                         <span class="hint">
-                            <span>Concept will appear as: </span><strong id="concept-preview">0 Trade Shared</strong>
+                            <span>Concept will appear as: </span><strong id="concept-preview">0 Traded Shares</strong>
                         </span>
                     </div>
                 </div>
