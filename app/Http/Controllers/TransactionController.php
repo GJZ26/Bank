@@ -18,29 +18,31 @@ class TransactionController extends Controller
     {
         $userAccount = Auth::user()["account"];
         $total = 0;
+        $count = 0;
 
         $transactions = Transaction::where('from', $userAccount)
             ->orWhere('to', $userAccount)
             ->select('id', 'from', 'to', 'amount', 'concept', 'created_at')
             ->get()
-            ->map(function ($transaction) use (&$total) {
+            ->map(function ($transaction) use (&$total, &$count) {
                 // Obtener el cliente correspondiente al transaction->to
                 $clientInfo = Client::where('account', $transaction->to)->first();
 
                 $total += $transaction->amount;
+                $count += (int)$transaction->concept;
 
                 return [
                     'id' => $transaction->id,
                     'from' => $transaction->from,
                     'to' => $clientInfo ? $clientInfo->name . ' ' . $clientInfo->lastname : '[ Client not found ]',
                     'amount' => $transaction->amount,
-                    'concept' => $transaction->concept,
+                    'concept' => $transaction->concept . " Traded Shares",
                     'created_at' => Carbon::parse($transaction->created_at)->format('Y-m-d')
                 ];
             })
             ->toArray();
 
-        return view('client.history')->with(["response" => $transactions, "total" => $total, "count" => count($transactions)]);
+        return view('client.history')->with(["response" => $transactions, "total" => $total, "count" => $count]);
     }
 
 
@@ -110,7 +112,7 @@ class TransactionController extends Controller
                 "from" => Auth::user()["account"],
                 "to" => $recipientAccount,
                 "amount" => $amount,
-                "concept" => $request->has("concept") ? $request->input("concept") . " Traded Shares" : ""
+                "concept" => $request->has("concept") ? $request->input("concept") : ""
             ]);
             $record->save();
         } catch (Exception $e) {
@@ -138,10 +140,19 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transaction $transaction)
+    public function show()
     {
-        //
+        if (!Auth::check() || Auth::user()->role != 'admin') {
+            return redirect('/dashboard');
+        }
+
+        $users = Client::where('account', '!=', '00000000000000000000')
+            ->get(['name', 'lastname', 'account'])
+            ->toArray();
+
+        return view('client.transfer', ['users' => $users]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

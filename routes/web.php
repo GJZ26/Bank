@@ -37,12 +37,7 @@ Route::middleware(["web"])->group(function () {
         return view('client.dashboard');
     })->middleware('auth');
 
-    Route::get('/transfer', function () {
-        if (Auth::user()['role'] != 'admin') {
-            return redirect('/dashboard');
-        }
-        return view('client.transfer');
-    })->middleware('auth');
+    Route::get('/transfer', [TransactionController::class, 'show'])->middleware('auth');
 
     Route::get('/history', [TransactionController::class, 'index'])->middleware('auth');
 

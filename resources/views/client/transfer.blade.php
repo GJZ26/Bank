@@ -68,7 +68,17 @@
                         </defs>
                     </svg>
                     <input type="number" name="recipient" id="recipient" placeholder="11-digit account number" required
-                        {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }}>
+                        {{ Auth::user()->role === 'admin' ? '' : 'disabled' }} list="accounts">
+                    <datalist id="accounts">
+                        @if (!empty($users))
+                            @foreach ($users as $user)
+                                <option value="{{ $user['account'] }}">{{ $user['name'] }} {{ $user['lastname'] }}
+                                </option>
+                            @endforeach
+                        @else
+                            <option value="0000">No user registered :(</option>
+                        @endif
+                    </datalist>
                 </div>
             </div>
             <div class="vertical-input">
