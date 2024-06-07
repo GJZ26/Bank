@@ -38,7 +38,7 @@
                 <thead>
                     <tr>
                         {{-- <th>Account Number</th> --}}
-                        <th class="not-too-interesting">Date</th>
+                        <th {{-- class="not-too-interesting" --}}>Date</th>
                         <th @if (Auth::user()['role'] == 'admin') class="not-too-interesting" @endif>Transaction</th>
                         @if (Auth::user()['role'] == 'admin')
                             <th>Recipient</th>
@@ -56,7 +56,7 @@
                                 {{-- <td>
                                     {{ str_repeat('*', 6) . substr($record['from'], -4) }}
                                 </td> --}}
-                                <td class="not-too-interesting">{{ $record['created_at'] }}</td>
+                                <td {{-- class="not-too-interesting" --}}>{{ $record['created_at'] }}</td>
                                 <td @if (Auth::user()['role'] == 'admin') class="not-too-interesting" @endif>
                                     {{ isset($record['concept']) ? $record['concept'] : '' }}
                                 </td>
@@ -90,8 +90,10 @@
                 </tbody>
             </table>
             @if (!empty($response))
-                <span class="hint summary" style="margin-top: 25px"><strong>Total transactions: </strong>{{ $count }}</span>
-                <span class="hint summary"><strong>Total transferred: </strong>${{ number_format($total, 2) }} USD</span>
+                <span class="hint summary" style="margin-top: 25px"><strong>Total Traded Shares:
+                    </strong>{{ $count }}</span>
+                <span class="hint summary"><strong>Total transferred: </strong>${{ number_format($total, 2) }}
+                    USD</span>
             @endif
             <span class="improve">Enhance your experience by visiting the site from your desktop.</span>
 
