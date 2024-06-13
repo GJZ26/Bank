@@ -1,4 +1,5 @@
 @include('partials.head', ['title' => 'Register a new user'])
+
 <body>
     @include('partials.nav')
 
@@ -62,6 +63,16 @@
                     <input type="checkbox" name="isActive" id="isActive" checked>
                     <span class="slider"></span>
                 </label>
+            </div>
+
+            <div class="horizontal-input">
+                <label for="date">Date</label>
+                @php
+                    $today = date('Y-m-d');
+                @endphp
+
+                <input type="date" name="date" id="date" value="{{ $today }}"
+                    max="{{ $today }}">
             </div>
 
             <hr>

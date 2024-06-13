@@ -16,7 +16,7 @@
                     {{ explode(' ', Auth::user()['name'])[0] }} {{ explode(' ', Auth::user()['lastname'])[0] }}
                 </h2>
                 <p>
-                    {{ Auth::user()['role'] === 'client' ? 'Basic Liquidity' : 'Admin' }}
+                    {{ Auth::user()['role'] === 'client' ? 'Temporary Holdings Account' : 'Admin' }}
                 </p>
             </div>
         </div>

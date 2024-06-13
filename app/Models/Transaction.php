@@ -12,6 +12,7 @@ class Transaction extends Model
         'from',
         'to',
         'amount',
-        'concept'
+        'concept',
+        'created_at'
     ];
 }

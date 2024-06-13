@@ -137,7 +137,7 @@
                             </path>
                             <path d="M11 15H10 9M13 10V5C13 3.34315 11.6569 2 10 2V2C8.34315 2 7 3.34315 7 5V10"></path>
                         </svg>
-                        <p>{{ Auth::user()['role'] === 'client' ? 'Basic Liquidity' : 'Admin' }}</p>
+                        <p>{{ Auth::user()['role'] === 'client' ? 'Temporary Holdings Account' : 'Admin' }}</p>
                     </div>
 
                     <div class="info-seg"
@@ -181,7 +181,13 @@
                             </path>
                             <path d="M6 13H8"></path>
                         </svg>
-                        <p>${{ number_format(Auth::user()['balance'], 2) }} USD</p>
+                        <p>
+                            @if (Auth::user()['role'] !== 'admin')
+                                ${{ number_format(Auth::user()['balance'], 2) }} USD
+                            @else
+                                Infinity
+                            @endif
+                        </p>
                     </div>
 
                     <div>

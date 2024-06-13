@@ -92,7 +92,7 @@
             @if (!empty($response))
                 <span class="hint summary" style="margin-top: 25px"><strong>Total Traded Shares:
                     </strong>{{ $count }}</span>
-                <span class="hint summary"><strong>Total transferred: </strong>${{ number_format($total, 2) }}
+                <span class="hint summary"><strong>Total Balance: </strong>${{ number_format($total, 2) }}
                     USD</span>
             @endif
             <span class="improve">Enhance your experience by visiting the site from your desktop.</span>

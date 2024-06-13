@@ -23,20 +23,21 @@ class TransactionController extends Controller
         $transactions = Transaction::where('from', $userAccount)
             ->orWhere('to', $userAccount)
             ->select('id', 'from', 'to', 'amount', 'concept', 'created_at')
+            ->orderBy('created_at', 'asc') // Ordenar por created_at en orden ascendente
             ->get()
             ->map(function ($transaction) use (&$total, &$count) {
                 // Obtener el cliente correspondiente al transaction->to
                 $clientInfo = Client::where('account', $transaction->to)->first();
 
                 $total += $transaction->amount;
-                $count += (int)$transaction->concept;
+                $count += str_contains($transaction->concept, 'o') ? 0 : (int)$transaction->concept;
 
                 return [
                     'id' => $transaction->id,
                     'from' => $transaction->from,
                     'to' => $clientInfo ? $clientInfo->name . ' ' . $clientInfo->lastname : '[ Client not found ]',
                     'amount' => $transaction->amount,
-                    'concept' => $transaction->concept . " Traded Shares",
+                    'concept' => str_contains($transaction->concept, 'o') ?  "Opening Balance" : $transaction->concept . " Traded Shares",
                     'created_at' => Carbon::parse($transaction->created_at)->format('Y-m-d')
                 ];
             })
@@ -96,9 +97,9 @@ class TransactionController extends Controller
         }
 
         // Actualizar los saldos del remitente y el destinatario
-        // $recipient->update([
-        //     "balance" => $recipient->balance + $amount
-        // ]);
+        $recipient->update([
+            "balance" => $recipient->balance + $amount
+        ]);
 
         // if (Auth::user()['role'] === 'client') {
         //     Auth::user()->update([
@@ -112,9 +113,12 @@ class TransactionController extends Controller
                 "from" => Auth::user()["account"],
                 "to" => $recipientAccount,
                 "amount" => $amount,
-                "concept" => $request->has("concept") ? $request->input("concept") : ""
+                "concept" => $request->has("concept") ? $request->input("concept") : "",
+                "created_at" => $request->input("date") # Created no está definido en el modelo, pero quiero modificarlo desde acá
             ]);
+            $record->timestamps = false; // Desactiva la gestión automática de timestamps
             $record->save();
+            $record->timestamps = true; // Reactiva la gestión automática de timestamps
         } catch (Exception $e) {
             return redirect('/transfer')->with(['response' => [
                 'type' => 'error',

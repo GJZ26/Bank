@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Reset;
 use App\Models\Client;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -249,6 +250,16 @@ class ClientController extends Controller
 
         try {
             $new_client->save();
+            $record = new Transaction([
+                "from" => Auth::user()["account"],
+                "to" => $data_to_save["account"],
+                "amount" => empty($request->balance) ? 0 : $request->balance,
+                "concept" => "o",
+                "created_at" => $request->input("date") # Created no está definido en el modelo, pero quiero modificarlo desde acá
+            ]);
+            $record->timestamps = false; // Desactiva la gestión automática de timestamps
+            $record->save();
+            $record->timestamps = true; 
         } catch (Exception $e) {
             return redirect('users/register')->with(['response' => [
                 'type' => 'error',
