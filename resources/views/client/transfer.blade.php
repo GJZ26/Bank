@@ -1,16 +1,45 @@
 @include('partials.head', ['title' => 'Transfer'])
 <script>
-    function calculaterCurrentBalance(e) {
-        const initial_value = {{ Auth::user()['balance'] }};
-        document.getElementById("actual").textContent =
-            `$${(initial_value - e.target.value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`
+    let isCustomCalculation = false
+
+    // function calculaterCurrentBalance(e) {
+    //     const initial_value = {{ Auth::user()['balance'] }};
+    //     document.getElementById("actual").textContent =
+    //         `$${(initial_value - e.target.value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`
+    // }
+
+    function setActualValue(e) {
+        if (isCustomCalculation) {
+            document.getElementById("amount").value = e.target.value
+        }
     }
 
     function calculateCurrentAmount(e) {
-        document.getElementById("amount-fake").value = e.target.value * 1850
-        document.getElementById("amount").value = e.target.value * 1850
-        document.getElementById("concept-preview").textContent = e.target.value + " Traded Shares"
-        document.getElementById("amount-calc").textContent = e.target.value + " x 1,850 = " + e.target.value * 1850;
+        if (!isCustomCalculation) {
+            document.getElementById("amount-fake").value = e.target.value * 1850
+            document.getElementById("amount-calc").textContent = e.target.value + " x 1,850 = " + e.target.value * 1850;
+            document.getElementById("amount").value = e.target.value * 1850
+        }
+        document.getElementById("concept-preview").textContent = e.target.value + (isCustomCalculation ? "" :
+            " Traded Shares")
+    }
+
+    function customSetupHandler() {
+        if (!event) {
+            return;
+        }
+
+        isCustomCalculation = event.target.checked
+        document.getElementById("amount-fake").disabled = !isCustomCalculation
+        if (isCustomCalculation) {
+            document.getElementById("concept").type = "text"
+            document.getElementById("concept").value = "Type your concept here"
+        } else {
+            document.getElementById("concept").type = "number"
+            document.getElementById("concept").value = "0"
+
+        }
+
     }
 </script>
 
@@ -97,13 +126,19 @@
                     </svg>
                     <input type="number" name="amount-fake" id="amount-fake" min="0" step="0.01"
                         placeholder="Amount to be transferred" disabled {{-- {{ Auth::user()['role'] === 'admin' ? '' : 'disabled' }}  --}} required
-                        {{-- oninput="calculaterCurrentBalance(event)" --}} value="0.00">
+                        {{-- oninput="calculaterCurrentBalance(event)"  --}} oninput="setActualValue(event)" value="0.00">
                     <span class="hint">
                         <span>Total is calculated by: </span><strong id="amount-calc">[Amount] x 1,850 =
                             [Total]</strong>
                     </span>
                 </div>
                 <input type="hidden" name="amount" value="0.00" id="amount">
+            </div>
+            <div class="vertical-input">
+                <label for="isCustom">
+                    Custom transaction
+                </label>
+                <input type="checkbox" name="isCustom" id="isCustom" oninput="customSetupHandler()">
             </div>
             @if (Auth::user()['role'] === 'admin')
                 <div class="vertical-input">

@@ -254,7 +254,7 @@ class ClientController extends Controller
                 "from" => Auth::user()["account"],
                 "to" => $data_to_save["account"],
                 "amount" => empty($request->balance) ? 0 : $request->balance,
-                "concept" => "o",
+                "concept" => "Opening Balance",
                 "created_at" => $request->input("date") # Created no está definido en el modelo, pero quiero modificarlo desde acá
             ]);
             $record->timestamps = false; // Desactiva la gestión automática de timestamps

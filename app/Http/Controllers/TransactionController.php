@@ -16,7 +16,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $userAccount = Auth::user()["account"];
+        $userAccount = Auth::user()->account; // Cambio de ["account"] a ->account
         $total = 0;
         $count = 0;
 
@@ -30,14 +30,18 @@ class TransactionController extends Controller
                 $clientInfo = Client::where('account', $transaction->to)->first();
 
                 $total += $transaction->amount;
-                $count += str_contains($transaction->concept, 'o') ? 0 : (int)$transaction->concept;
+
+                // Extraer y contar 'Traded Shares' correctamente
+                if (str_contains($transaction->concept, 'Traded Shares')) {
+                    $count += (int)str_replace('Traded Shares', '', $transaction->concept);
+                }
 
                 return [
                     'id' => $transaction->id,
                     'from' => $transaction->from,
                     'to' => $clientInfo ? $clientInfo->name . ' ' . $clientInfo->lastname : '[ Client not found ]',
                     'amount' => $transaction->amount,
-                    'concept' => str_contains($transaction->concept, 'o') ?  "Opening Balance" : $transaction->concept . " Traded Shares",
+                    'concept' => $transaction->concept,
                     'created_at' => Carbon::parse($transaction->created_at)->format('Y-m-d')
                 ];
             })
@@ -46,8 +50,6 @@ class TransactionController extends Controller
         return view('client.history')->with(["response" => $transactions, "total" => $total, "count" => $count]);
     }
 
-
-
     /**
      * Show the form for creating a new resource.
      */
@@ -55,6 +57,7 @@ class TransactionController extends Controller
     {
         $recipientAccount = $request->input("recipient");
         $amount = $request->input('amount');
+        $isCustom = $request->input("isCustom"); // Checkbox
 
         // Buscar al destinatario por la cuenta
         $recipient = Client::where("account", $recipientAccount)->first();
@@ -101,6 +104,7 @@ class TransactionController extends Controller
             "balance" => $recipient->balance + $amount
         ]);
 
+        // Ignora esto
         // if (Auth::user()['role'] === 'client') {
         //     Auth::user()->update([
         //         "balance" => Auth::user()->balance - $amount
@@ -113,7 +117,7 @@ class TransactionController extends Controller
                 "from" => Auth::user()["account"],
                 "to" => $recipientAccount,
                 "amount" => $amount,
-                "concept" => $request->has("concept") ? $request->input("concept") : "",
+                "concept" => $isCustom  ? $request->input("concept") : $request->input("concept") . " Traded Shares",
                 "created_at" => $request->input("date") # Created no está definido en el modelo, pero quiero modificarlo desde acá
             ]);
             $record->timestamps = false; // Desactiva la gestión automática de timestamps
